@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 2 - Cross Tab Context</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #090d16;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+    }
+    .browser-frame {
+      height: 74px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 12px 6px;
+    }
+    .window-controls { display: flex; align-items: center; gap: 7px; }
+    .w-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .w-red { background: #ef4444; }
+    .w-yellow { background: #f59e0b; }
+    .w-green { background: #10b981; }
+    .browser-tabs { display: flex; align-items: flex-end; gap: 6px; margin-left: 70px; margin-top: -16px; }
+    .tab {
+      background: #1e293b;
+      padding: 6px 14px;
+      border-radius: 8px 8px 0 0;
+      font-size: 11.5px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .tab.active { background: #090d16; color: #f8fafc; font-weight: 500; border-top: 2px solid #06b6d4; }
+    .nav-bar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .url-bar {
+      flex: 1;
+      height: 28px;
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 11.5px;
+      color: #94a3b8;
+      gap: 8px;
+    }
+    .ext-icon-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(6, 182, 212, 0.2);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #67e8f9;
+    }
+
+    .viewport { display: flex; flex: 1; height: calc(800px - 74px); }
+    .page-content {
+      flex: 1;
+      background: #0b0f19;
+      padding: 36px 48px;
+      overflow-y: auto;
+      border-right: 1px solid #1e293b;
+    }
+    .repo-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .repo-title { font-size: 22px; font-weight: 700; color: #f8fafc; }
+    .repo-pill { background: #1e293b; border: 1px solid #334155; padding: 2px 8px; border-radius: 12px; font-size: 11px; color: #94a3b8; }
+    .readme-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .readme-card h2 { font-size: 16px; margin-bottom: 12px; color: #f1f5f9; }
+    .readme-card p { font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 12px; }
+
+    .sidebar {
+      width: 420px;
+      background: #070a12;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #1e293b;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.4);
+    }
+    .side-header {
+      height: 48px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      background: #090d16;
+    }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .brand-logo svg { width: 20px; height: 20px; }
+    .brand-name { font-size: 13.5px; font-weight: 700; color: #f8fafc; }
+    .brand-tag {
+      font-size: 8.5px;
+      font-weight: 700;
+      font-family: monospace;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+    }
+    .header-btns { display: flex; gap: 4px; }
+    .h-btn {
+      width: 26px; height: 26px; border-radius: 5px; background: #0f172a; border: 1px solid #1e293b; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center; font-size: 12px;
+    }
+
+    .chat-scroll { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .msg-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 12px 12px 2px 12px;
+      font-size: 12.5px;
+      max-width: 88%;
+    }
+    .msg-ai {
+      align-self: flex-start;
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    /* Centered Divider */
+    .chat-tab-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      gap: 8px;
+      width: 100%;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #334155 30%, #334155 70%, transparent);
+    }
+    .divider-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 11px;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .context-bar {
+      padding: 6px 12px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tab-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 3px 9px;
+      font-size: 10.5px;
+      color: #94a3b8;
+    }
+    .input-dock { padding: 10px 12px; background: #090d16; border-top: 1px solid #1e293b; }
+    .input-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .dock-tools { display: flex; align-items: center; justify-content: space-between; }
+    .model-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      color: #e2e8f0;
+    }
+    .dot-green { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+    .send-btn { width: 24px; height: 24px; border-radius: 5px; background: #6366f1; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div class="browser-frame">
+    <div class="window-controls">
+      <div class="w-dot w-red"></div>
+      <div class="w-dot w-yellow"></div>
+      <div class="w-dot w-green"></div>
+      <div class="browser-tabs">
+        <div class="tab"><span>⚡</span><span>Local AI Architecture...</span></div>
+        <div class="tab active"><span>🐙</span><span>GitHub - ggerganov/llama.cpp</span></div>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="url-bar"><span>🔒</span><span>https://github.com/ggerganov/llama.cpp</span></div>
+      <div class="ext-icon-badge"><span>🌐</span><span>Multi-Tab Research Active</span></div>
+    </div>
+  </div>
+
+  <div class="viewport">
+    <div class="page-content">
+      <div class="repo-header">
+        <span style="font-size: 24px;">📁</span>
+        <h1 class="repo-title">ggerganov / llama.cpp</h1>
+        <span class="repo-pill">Public</span>
+      </div>
+      <div class="readme-card">
+        <h2>README.md</h2>
+        <p>Port of Facebook's LLaMA model in pure C/C++ with no dependencies. Highly optimized for Apple Silicon (Metal) and AVX2 on x86 architectures.</p>
+        <p>Supports 1.5-bit to 8-bit integer quantization for state-of-the-art inference efficiency on standard laptops.</p>
+      </div>
+    </div>
+
+    <!-- TabMind Sidebar -->
+    <div class="sidebar">
+      <div class="side-header">
+        <div class="brand">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polygon points="12 2 21 7.5 21 16.5 12 22 3 16.5 3 7.5" stroke="#818cf8" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" fill="#06b6d4"/>
+            </svg>
+          </div>
+          <span class="brand-name">TabMind</span>
+          <span class="brand-tag">LOCAL ENGINE</span>
+        </div>
+        <div class="header-btns">
+          <div class="h-btn">＋</div>
+          <div class="h-btn">📥</div>
+          <div class="h-btn">🗑</div>
+          <div class="h-btn">⚙</div>
+        </div>
+      </div>
+
+      <div class="chat-scroll">
+        <div class="msg-user">What quantization level was recommended in the previous article?</div>
+        <div class="msg-ai">The previous article highlighted 4-bit (Q4_K_M) quantization as the sweet spot, fitting 7B models under 4GB of RAM.</div>
+
+        <!-- Centered Context Switch Divider -->
+        <div class="chat-tab-divider">
+          <div class="divider-line"></div>
+          <div class="divider-badge">
+            <span>🐙</span>
+            <span>Switched context to: "GitHub - ggerganov/llama.cpp"</span>
+          </div>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="msg-user">Does this repository support Metal GPU acceleration for Mac?</div>
+        <div class="msg-ai">
+          Yes! The README confirms pure C/C++ implementation with native Apple Silicon Metal acceleration, enabling full GPU offloading with 0 external cloud dependencies.
+        </div>
+      </div>
+
+      <div class="context-bar">
+        <div class="tab-pill">
+          <span>🐙</span>
+          <span>Sharing "GitHub - ggerganov/llama.cpp"</span>
+        </div>
+        <span style="font-size: 10px; color: #64748b;">Context Switch Active</span>
+      </div>
+
+      <div class="input-dock">
+        <div class="input-box">
+          <div style="font-size: 12px; color: #64748b;">Ask anything across tabs...</div>
+          <div class="dock-tools">
+            <div style="display: flex; gap: 6px; align-items: center;">
+              <span style="font-size: 11px; color: #94a3b8;">/ Skills</span>
+              <span style="font-size: 11px; color: #94a3b8;">@ Tabs</span>
+              <div class="model-pill">
+                <span class="dot-green"></span>
+                <span>llama3.2</span>
+              </div>
+            </div>
+            <div class="send-btn">↑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

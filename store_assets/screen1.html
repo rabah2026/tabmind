@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 1 - Overview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #090d16;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Chrome Browser Top Frame */
+    .browser-frame {
+      height: 74px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 12px 6px;
+      user-select: none;
+    }
+    .window-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .w-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .w-red { background: #ef4444; }
+    .w-yellow { background: #f59e0b; }
+    .w-green { background: #10b981; }
+
+    .browser-tabs {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      margin-left: 70px;
+      margin-top: -16px;
+    }
+    .tab {
+      background: #1e293b;
+      padding: 6px 14px;
+      border-radius: 8px 8px 0 0;
+      font-size: 11.5px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      max-width: 200px;
+    }
+    .tab.active {
+      background: #090d16;
+      color: #f8fafc;
+      font-weight: 500;
+      border-top: 2px solid #6366f1;
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .url-bar {
+      flex: 1;
+      height: 28px;
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 11.5px;
+      color: #94a3b8;
+      gap: 8px;
+    }
+    .ext-icon-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.5);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #c7d2fe;
+    }
+
+    /* Main Viewport Split */
+    .viewport {
+      display: flex;
+      flex: 1;
+      height: calc(800px - 74px);
+    }
+    /* Web Page Content */
+    .page-content {
+      flex: 1;
+      background: #0b0f19;
+      padding: 36px 48px;
+      overflow-y: auto;
+      border-right: 1px solid #1e293b;
+    }
+    .article-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #818cf8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .article-title {
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff 40%, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .article-lead {
+      font-size: 14px;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .article-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+    }
+    .article-box h3 {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+    .article-box p {
+      font-size: 12.5px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    /* TabMind Sidebar */
+    .sidebar {
+      width: 420px;
+      background: #070a12;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #1e293b;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.4);
+    }
+    .side-header {
+      height: 48px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      background: #090d16;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-logo svg {
+      width: 20px;
+      height: 20px;
+    }
+    .brand-name {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.2px;
+    }
+    .brand-tag {
+      font-size: 8.5px;
+      font-weight: 700;
+      font-family: monospace;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+    }
+    .header-btns {
+      display: flex;
+      gap: 4px;
+    }
+    .h-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Chat Area */
+    .chat-scroll {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skill-pill-active {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      color: #c7d2fe;
+      align-self: flex-start;
+    }
+    .msg-user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 12px 12px 2px 12px;
+      font-size: 12.5px;
+      max-width: 88%;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+    }
+    .msg-ai {
+      align-self: flex-start;
+      width: 100%;
+      font-size: 12px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .msg-table-wrap {
+      margin: 8px 0;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #090d16;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    th {
+      background: #0f172a;
+      color: #f1f5f9;
+      font-weight: 600;
+      padding: 6px 8px;
+      border-bottom: 1px solid #1e293b;
+      text-align: left;
+    }
+    td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #1e293b;
+      color: #94a3b8;
+    }
+    tr:last-child td { border-bottom: none; }
+    .badge-privacy {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 9.5px;
+      font-weight: 600;
+    }
+
+    /* Context Pill Bar */
+    .context-bar {
+      padding: 6px 12px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tab-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 3px 9px;
+      font-size: 10.5px;
+      color: #94a3b8;
+      max-width: 270px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Input Dock */
+    .input-dock {
+      padding: 10px 12px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+    }
+    .input-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .input-placeholder {
+      font-size: 12px;
+      color: #64748b;
+    }
+    .dock-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tools-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .model-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    .dot-green { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+    .send-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 5px;
+      background: #6366f1;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="browser-frame">
+    <div class="window-controls">
+      <div class="w-dot w-red"></div>
+      <div class="w-dot w-yellow"></div>
+      <div class="w-dot w-green"></div>
+      <div class="browser-tabs">
+        <div class="tab active">
+          <span>⚡</span>
+          <span>Local AI Architecture...</span>
+        </div>
+        <div class="tab">
+          <span>📄</span>
+          <span>GitHub - llama.cpp</span>
+        </div>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="url-bar">
+        <span>🔒</span>
+        <span>https://techblog.io/deep-dive/local-ai-agents</span>
+      </div>
+      <div class="ext-icon-badge">
+        <span>💎</span>
+        <span>TabMind Side Panel</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="viewport">
+    <div class="page-content">
+      <div class="article-tag">Architecture Guide</div>
+      <h1 class="article-title">High-Performance On-Device AI Runtimes</h1>
+      <p class="article-lead">
+        Deploying large language models directly into client environments preserves user privacy, eliminates per-token API charges, and guarantees offline availability.
+      </p>
+      <div class="article-box">
+        <h3>1. Memory & Quantization Optimization</h3>
+        <p>4-bit and 8-bit quantized weights allow models up to 7 billion parameters to run in under 4GB of RAM at lightning-fast token generation speeds.</p>
+      </div>
+      <div class="article-box">
+        <h3>2. Full Air-Gapped Data Isolation</h3>
+        <p>Enterprise workloads require strict containment where sensitive source code and user documents are never transmitted over public networks.</p>
+      </div>
+    </div>
+
+    <!-- TabMind Sidebar -->
+    <div class="sidebar">
+      <div class="side-header">
+        <div class="brand">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none">
+              <polygon points="12 2 21 7.5 21 16.5 12 22 3 16.5 3 7.5" stroke="#818cf8" stroke-width="2"/>
+              <circle cx="12" cy="12" r="3" fill="#06b6d4"/>
+            </svg>
+          </div>
+          <span class="brand-name">TabMind</span>
+          <span class="brand-tag">LOCAL ENGINE</span>
+        </div>
+        <div class="header-btns">
+          <div class="h-btn" title="New Chat">＋</div>
+          <div class="h-btn" title="Export Chat">📥</div>
+          <div class="h-btn" title="Clear Chat">🗑</div>
+          <div class="h-btn" title="Settings">⚙</div>
+        </div>
+      </div>
+
+      <div class="chat-scroll">
+        <div class="skill-pill-active">
+          <span>📊</span>
+          <span>Summarize as table</span>
+        </div>
+
+        <div class="msg-user">
+          Summarize on-device runtime comparison from this page.
+        </div>
+
+        <div class="msg-ai">
+          <p>Here is the structured breakdown of local AI engines running directly on your hardware:</p>
+          <div class="msg-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Runtime</th>
+                  <th>RAM</th>
+                  <th>Speed</th>
+                  <th>Privacy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Ollama (Llama 3.2)</strong></td>
+                  <td>2.4 GB</td>
+                  <td>~45 t/s</td>
+                  <td><span class="badge-privacy">100% Local</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Gemini Nano (Chrome)</strong></td>
+                  <td>1.8 GB</td>
+                  <td>~60 t/s</td>
+                  <td><span class="badge-privacy">On-Device</span></td>
+                </tr>
+                <tr>
+                  <td><strong>LM Studio / Local</strong></td>
+                  <td>3.1 GB</td>
+                  <td>~40 t/s</td>
+                  <td><span class="badge-privacy">100% Local</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>All engines process context in memory without sending data off your machine.</p>
+        </div>
+      </div>
+
+      <div class="context-bar">
+        <div class="tab-pill">
+          <span>📄</span>
+          <span>Sharing "High-Performance On-Device AI Runtimes"</span>
+        </div>
+        <span style="font-size: 10px; color: #64748b;">Active Tab</span>
+      </div>
+
+      <div class="input-dock">
+        <div class="input-box">
+          <div class="input-placeholder">Ask anything about this tab... (@ tab, / skill)</div>
+          <div class="dock-tools">
+            <div class="tools-left">
+              <span style="font-size: 11px; color: #94a3b8;">/ Skills</span>
+              <span style="font-size: 11px; color: #94a3b8;">@ Tabs</span>
+              <div class="model-pill">
+                <span class="dot-green"></span>
+                <span>llama3.2</span>
+              </div>
+            </div>
+            <div class="send-btn">↑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Marquee Promo Tile 1400x560</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1400px;
+      height: 560px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at 75% 50%, #1e1b4b 0%, #090d16 65%, #05070d 100%);
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 100px;
+      position: relative;
+    }
+    .grid-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-size: 32px 32px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: 620px;
+      z-index: 10;
+    }
+    .tagline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #c7d2fe;
+      margin-bottom: 20px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .hero-title {
+      font-size: 52px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 40%, #c7d2fe 75%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    .hero-desc {
+      font-size: 18px;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .pill-list {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pill {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+    .hero-graphic {
+      width: 440px;
+      height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.4));
+      z-index: 10;
+    }
+    .hero-graphic svg {
+      width: 320px;
+      height: 320px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="hero-content">
+    <div class="tagline-badge">
+      <span class="dot"></span>
+      <span>100% On-Device Private Inference</span>
+    </div>
+    <h1 class="hero-title">TabMind</h1>
+    <p class="hero-desc">
+      Your private AI sidebar assistant for browser tabs. Chat, summarize, and cross-reference research with zero cloud tracking.
+    </p>
+    <div class="pill-list">
+      <div class="pill">⚡ Ollama & Gemini Nano</div>
+      <div class="pill">📑 Smart Tab Context</div>
+      <div class="pill">⚡ 40+ Built-in Skills</div>
+      <div class="pill">📥 Markdown Export</div>
+    </div>
+  </div>
+  <div class="hero-graphic">
+    <svg viewBox="0 0 24 24" fill="none">
+      <polygon points="12 2 21 7.5 21 16.5 12 22 3 16.5 3 7.5" stroke="url(#mgrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="3.2" fill="url(#mgrad)"/>
+      <line x1="12" y1="2" x2="12" y2="9" stroke="url(#mgrad)" stroke-width="1.4"/>
+      <line x1="12" y1="15" x2="12" y2="22" stroke="url(#mgrad)" stroke-width="1.4"/>
+      <line x1="3" y1="7.5" x2="9.5" y2="10.5" stroke="url(#mgrad)" stroke-width="1.4"/>
+      <line x1="14.5" y1="13.5" x2="21" y2="16.5" stroke="url(#mgrad)" stroke-width="1.4"/>
+      <defs>
+        <linearGradient id="mgrad" x1="3" y1="2" x2="21" y2="22">
+          <stop stop-color="#6366f1"/>
+          <stop offset="0.5" stop-color="#8b5cf6"/>
+          <stop offset="1" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</body>
+</html>

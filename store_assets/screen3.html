@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Screenshot 3 - Skills Catalog</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1280px;
+      height: 800px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #090d16;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+    }
+    .browser-frame {
+      height: 74px;
+      background: #0f172a;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 12px 6px;
+    }
+    .window-controls { display: flex; align-items: center; gap: 7px; }
+    .w-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .w-red { background: #ef4444; }
+    .w-yellow { background: #f59e0b; }
+    .w-green { background: #10b981; }
+    .browser-tabs { display: flex; align-items: flex-end; gap: 6px; margin-left: 70px; margin-top: -16px; }
+    .tab {
+      background: #1e293b;
+      padding: 6px 14px;
+      border-radius: 8px 8px 0 0;
+      font-size: 11.5px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .tab.active { background: #090d16; color: #f8fafc; font-weight: 500; border-top: 2px solid #8b5cf6; }
+    .nav-bar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .url-bar {
+      flex: 1;
+      height: 28px;
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 11.5px;
+      color: #94a3b8;
+      gap: 8px;
+    }
+    .viewport { display: flex; flex: 1; height: calc(800px - 74px); position: relative; }
+    .page-content { flex: 1; background: #0b0f19; padding: 36px 48px; border-right: 1px solid #1e293b; }
+
+    .sidebar {
+      width: 420px;
+      background: #070a12;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #1e293b;
+      position: relative;
+    }
+    .side-header {
+      height: 48px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e293b;
+      background: #090d16;
+    }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .brand-name { font-size: 13.5px; font-weight: 700; color: #f8fafc; }
+
+    /* Open Skills Dropdown overlay */
+    .skills-popover {
+      position: absolute;
+      bottom: 60px;
+      left: 12px;
+      right: 12px;
+      top: 54px;
+      background: #090d16;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 50;
+    }
+    .pop-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pop-title { font-size: 12.5px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 6px; }
+    .add-btn {
+      background: #6366f1;
+      color: white;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .search-box {
+      margin: 8px 12px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: #cbd5e1;
+    }
+    .cat-chips {
+      display: flex;
+      gap: 6px;
+      padding: 0 12px 8px;
+      border-bottom: 1px solid #1e293b;
+      overflow-x: auto;
+    }
+    .chip {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 10px;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+    .chip.active { background: #6366f1; color: white; border-color: #6366f1; font-weight: 600; }
+
+    .skills-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .skill-row {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skill-row:hover { border-color: #6366f1; background: #131d35; }
+    .skill-icon { font-size: 16px; }
+    .skill-info { flex: 1; }
+    .skill-name { font-size: 12px; font-weight: 600; color: #f1f5f9; }
+    .skill-desc { font-size: 10.5px; color: #64748b; }
+
+    .input-dock { padding: 10px 12px; background: #090d16; border-top: 1px solid #1e293b; margin-top: auto; }
+    .input-box {
+      background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="browser-frame">
+    <div class="window-controls">
+      <div class="w-dot w-red"></div>
+      <div class="w-dot w-yellow"></div>
+      <div class="w-dot w-green"></div>
+      <div class="browser-tabs">
+        <div class="tab active"><span>📚</span><span>Research Paper - Transformers</span></div>
+      </div>
+    </div>
+    <div class="nav-bar">
+      <div class="url-bar"><span>🔒</span><span>https://arxiv.org/abs/attention-is-all-you-need</span></div>
+    </div>
+  </div>
+
+  <div class="viewport">
+    <div class="page-content">
+      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Attention Is All You Need</h1>
+      <p style="color: #94a3b8; font-size: 13px; line-height: 1.6;">
+        The dominant sequence transduction models are based on complex recurrent or convolutional neural networks. We propose the Transformer, a model architecture eschewing recurrence and relying entirely on an attention mechanism...
+      </p>
+    </div>
+
+    <div class="sidebar">
+      <div class="side-header">
+        <div class="brand">
+          <span class="brand-name">TabMind</span>
+          <span style="font-size: 9px; font-weight: 700; background: rgba(99,102,241,0.2); padding: 1px 5px; border-radius: 4px; color: #a5b4fc;">40+ SKILLS</span>
+        </div>
+      </div>
+
+      <!-- Skills Palette -->
+      <div class="skills-popover">
+        <div class="pop-header">
+          <span class="pop-title"><span>⚡</span><span>Skills Catalog (40+)</span></span>
+          <button class="add-btn">＋ Add Custom</button>
+        </div>
+        <div class="search-box">🔍 Search skills or type instructions...</div>
+        <div class="cat-chips">
+          <div class="chip active">All (40)</div>
+          <div class="chip">Understand (11)</div>
+          <div class="chip">Research (6)</div>
+          <div class="chip">Learning (4)</div>
+          <div class="chip">Custom (1)</div>
+        </div>
+        <div class="skills-list">
+          <div class="skill-row">
+            <span class="skill-icon">📝</span>
+            <div class="skill-info">
+              <div class="skill-name">Summarize as text</div>
+              <div class="skill-desc">Finds core argument & identifies key takeaways.</div>
+            </div>
+          </div>
+          <div class="skill-row" style="border-color: #6366f1; background: #131d35;">
+            <span class="skill-icon">📊</span>
+            <div class="skill-info">
+              <div class="skill-name">Summarize as table</div>
+              <div class="skill-desc">Extracts comparisons into clean Markdown tables.</div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-icon">✅</span>
+            <div class="skill-info">
+              <div class="skill-name">Action items</div>
+              <div class="skill-desc">Scans page for deliverables, tasks, and owners.</div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-icon">🗺️</span>
+            <div class="skill-info">
+              <div class="skill-name">Study guide</div>
+              <div class="skill-desc">Condenses material into core concepts and formulas.</div>
+            </div>
+          </div>
+          <div class="skill-row">
+            <span class="skill-icon">💡</span>
+            <div class="skill-info">
+              <div class="skill-name">Code Explainer (Custom)</div>
+              <div class="skill-desc">User-created custom skill for system architecture.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-dock">
+        <div class="input-box">
+          <div style="font-size: 12px; color: #64748b;">Type / for skills menu...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

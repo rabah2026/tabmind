@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabMind - Local AI Tab Assistant</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Distinctive Linear/Raycast Style Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <polygon points="12 2 21 7.5 21 16.5 12 22 3 16.5 3 7.5" stroke="url(#brandGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="12" r="3" fill="url(#brandGrad)"/>
+            <line x1="12" y1="2" x2="12" y2="9" stroke="url(#brandGrad)" stroke-width="1.5"/>
+            <line x1="12" y1="15" x2="12" y2="22" stroke="url(#brandGrad)" stroke-width="1.5"/>
+            <line x1="3" y1="7.5" x2="9.5" y2="10.5" stroke="url(#brandGrad)" stroke-width="1.5"/>
+            <line x1="14.5" y1="13.5" x2="21" y2="16.5" stroke="url(#brandGrad)" stroke-width="1.5"/>
+            <defs>
+              <linearGradient id="brandGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366F1"/>
+                <stop offset="0.5" stop-color="#8B5CF6"/>
+                <stop offset="1" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">TabMind</span>
+          <span class="brand-tag">LOCAL ENGINE</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="newChatBtn" class="action-icon-btn" title="New Chat (+)" aria-label="New Chat">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </button>
+        <button id="exportChatBtn" class="action-icon-btn" title="Export Chat (.md)" aria-label="Export Chat">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </button>
+        <button id="clearChatBtn" class="action-icon-btn" title="Clear Chat (Trash)" aria-label="Clear Chat">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+            <line x1="10" y1="11" x2="10" y2="17"/>
+            <line x1="14" y1="11" x2="14" y2="17"/>
+          </svg>
+        </button>
+        <button id="settingsBtn" class="action-icon-btn" title="Engine Settings" aria-label="Settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Chat Workspace -->
+    <main class="chat-container" id="chatContainer">
+      <!-- High-Tech Empty State (Bespoke Linear Design) -->
+      <div class="empty-state" id="emptyState">
+        <div class="hero-badge">
+          <div class="hero-prism">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <polygon points="12 2 21 7.5 21 16.5 12 22 3 16.5 3 7.5" stroke="url(#heroGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="3.5" fill="url(#heroGrad)"/>
+              <defs>
+                <linearGradient id="heroGrad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#6366F1"/>
+                  <stop offset="0.5" stop-color="#A855F7"/>
+                  <stop offset="1" stop-color="#06B6D4"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h2 class="hero-title">Local Tab Intelligence</h2>
+          <p class="hero-subtitle">100% on-device neural processing • Zero external data leaks</p>
+        </div>
+
+        <!-- Sleek 2x2 Action Tiles (Raycast / Linear style) -->
+        <div class="suggested-prompts-grid" id="suggestedPromptsList">
+          <button class="action-tile" data-prompt="Summarize this page in 3-5 concise bullet points highlighting key numbers, facts, and conclusions.">
+            <div class="tile-header">
+              <span class="tile-icon">⚡</span>
+              <span class="tile-kbd">↵ Run</span>
+            </div>
+            <strong class="tile-title">Quick Summary</strong>
+            <span class="tile-desc">Extract core takeaways and conclusion</span>
+          </button>
+
+          <button class="action-tile" data-prompt="Extract all important facts, statistics, numbers, dates, and core arguments from this tab into a structured list.">
+            <div class="tile-header">
+              <span class="tile-icon">🔍</span>
+              <span class="tile-kbd">↵ Run</span>
+            </div>
+            <strong class="tile-title">Key Facts &amp; Data</strong>
+            <span class="tile-desc">Identify metrics, claims, and data points</span>
+          </button>
+
+          <button class="action-tile" data-prompt="Identify and list all practical action items, recommendations, and step-by-step instructions from this tab.">
+            <div class="tile-header">
+              <span class="tile-icon">📋</span>
+              <span class="tile-kbd">↵ Run</span>
+            </div>
+            <strong class="tile-title">Action Items</strong>
+            <span class="tile-desc">Scannable tasks, deliverables, and steps</span>
+          </button>
+
+          <button class="action-tile" data-prompt="Compare and synthesize information across all currently open tabs in this window. Group by topic and note key differences.">
+            <div class="tile-header">
+              <span class="tile-icon">🌐</span>
+              <span class="tile-kbd">↵ Run</span>
+            </div>
+            <strong class="tile-title">Synthesize All Tabs</strong>
+            <span class="tile-desc">Cross-tab analysis across open windows</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Messages Thread -->
+      <div class="messages-list" id="messagesList"></div>
+    </main>
+
+    <!-- Bottom Dock & Input Command Palette -->
+    <footer class="command-dock">
+      <!-- Privacy & Local Security Badge (Dismissible) -->
+      <div class="security-badge" id="privacyNotice">
+        <div class="badge-left">
+          <span class="shield-dot"></span>
+          <span class="badge-msg">100% On-Device Inference • No data leaves this device</span>
+        </div>
+        <button id="dismissNoticeBtn" class="badge-dismiss-btn" type="button" aria-label="Dismiss">✕</button>
+      </div>
+
+      <!-- Active Tab Context Pill (Technical, Monospace Monitored) -->
+      <div class="tab-context-strip">
+        <div class="context-pill" id="tabContextPill" title="Click to switch or manage target tabs">
+          <div class="pill-left">
+            <img id="tabFavicon" class="context-favicon" src="" alt="" style="display: none;">
+            <span id="tabDefaultIcon" class="context-default-icon">📄</span>
+            <span class="context-label" id="tabPillText">Active Tab</span>
+          </div>
+          <div class="pill-actions">
+            <button id="tabSwitcherTrigger" class="pill-btn switch" type="button" title="Switch tab" aria-label="Switch tab">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <button id="detachTabBtn" class="pill-btn detach" type="button" title="Detach tab context" aria-label="Detach tab context">✕</button>
+          </div>
+        </div>
+
+        <button id="refreshContextBtn" class="icon-refresh-btn" title="Refresh tab context" aria-label="Refresh tab context">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Active Skill Applied Pill -->
+      <div class="active-skill-banner" id="activeSkillPillRow" style="display: none;">
+        <span class="skill-tag-icon">⚡</span>
+        <span class="skill-tag-name" id="activeSkillName">Active Skill</span>
+        <button id="clearSkillBtn" class="skill-tag-clear" type="button" title="Remove skill">✕</button>
+      </div>
+
+      <!-- Highlighted Selection Pill -->
+      <div class="selection-banner-card" id="selectionPill" style="display: none;">
+        <span class="selection-flag">SELECTION</span>
+        <span class="selection-snippet" id="selectionQuote">Selected text snippet</span>
+        <button id="clearSelectionBtn" class="selection-clear" type="button" aria-label="Clear selection">✕</button>
+      </div>
+
+      <!-- Restricted Page Notification -->
+      <div class="system-page-alert" id="restrictedPill" style="display: none;">
+        <span>Restricted system tab. Switch to any regular web tab.</span>
+      </div>
+
+      <!-- Raycast-Style Command Input Bar -->
+      <form id="chatForm" class="command-input-container">
+        <div class="command-textarea-wrapper">
+          <textarea
+            id="userInput"
+            class="command-textarea"
+            placeholder="Ask anything... Type / for skills, @ for tabs"
+            rows="1"
+            maxlength="4000"
+          ></textarea>
+        </div>
+
+        <div class="command-toolbar">
+          <div class="toolbar-left">
+            <button type="button" id="skillsMenuBtn" class="command-chip" title="Browse skills (/)">
+              <kbd class="key-hint">/</kbd>
+              <span>Skills</span>
+            </button>
+            <button type="button" id="atMentionBtn" class="command-chip" title="Target tab (@)">
+              <kbd class="key-hint">@</kbd>
+              <span>Tabs</span>
+            </button>
+          </div>
+
+          <div class="toolbar-right">
+            <!-- Model Badge -->
+            <button type="button" id="modelSelectorPill" class="model-engine-badge" title="Configure local engine">
+              <span class="engine-indicator" id="modelStatusDot"></span>
+              <span class="engine-name" id="modelNameText">Auto</span>
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+
+            <!-- Stop Generation Button -->
+            <button type="button" id="stopBtn" class="stream-btn stop" style="display: none;" title="Stop response" aria-label="Stop">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+              </svg>
+            </button>
+
+            <!-- Send Button -->
+            <button type="submit" id="sendBtn" class="stream-btn send" title="Execute query (Enter)" aria-label="Send">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </footer>
+
+    <!-- Tab Mention Popover (Raycast Spotlight Style) -->
+    <div class="launcher-palette" id="tabDropdownMenu" style="display: none;">
+      <div class="palette-header">
+        <span class="palette-title">Target Tab</span>
+        <button id="closeDropdownBtn" class="palette-close-btn" type="button">✕</button>
+      </div>
+      <div class="palette-items-list" id="dropdownItemsList">
+        <button class="palette-item active" data-tab-id="active">
+          <span class="palette-item-icon">📌</span>
+          <div class="palette-item-info">
+            <span class="palette-item-title">Current Active Tab</span>
+            <small class="palette-item-sub">Follows whichever tab is currently in focus</small>
+          </div>
+        </button>
+        <button class="palette-item" data-tab-id="all">
+          <span class="palette-item-icon">🌐</span>
+          <div class="palette-item-info">
+            <span class="palette-item-title">All Open Tabs</span>
+            <small class="palette-item-sub">Synthesize and compare across all tabs</small>
+          </div>
+        </button>
+        <div class="palette-divider"></div>
+        <div class="palette-section-label">Open Tabs</div>
+        <div id="dynamicTabList" class="palette-dynamic-group"></div>
+      </div>
+    </div>
+
+    <!-- Skills Command Palette (Raycast / Spotlight Style) -->
+    <div class="launcher-palette skills-palette-expanded" id="skillsDropdownMenu" style="display: none;">
+      <div class="palette-header">
+        <span class="palette-title">Skills Palette</span>
+        <div class="palette-actions-right">
+          <button id="openAddSkillModalBtn" class="palette-action-btn" type="button">+ Custom skill</button>
+          <button id="closeSkillsMenuBtn" class="palette-close-btn" type="button">✕</button>
+        </div>
+      </div>
+
+      <!-- Search Box inside palette -->
+      <div class="palette-search-container">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="skillSearchInput" class="palette-search-field" placeholder="Search 40+ skills..." />
+        <span class="palette-esc-badge">ESC</span>
+      </div>
+
+      <!-- Category Filter Chips -->
+      <div class="palette-categories-bar" id="skillsCategoryBar">
+        <button class="palette-cat-chip active" data-cat="all">All</button>
+        <button class="palette-cat-chip" data-cat="understand">Understand</button>
+        <button class="palette-cat-chip" data-cat="research">Research</button>
+        <button class="palette-cat-chip" data-cat="shopping">Shopping</button>
+        <button class="palette-cat-chip" data-cat="writing">Writing</button>
+        <button class="palette-cat-chip" data-cat="learning">Learning</button>
+        <button class="palette-cat-chip" data-cat="fun">Fun</button>
+        <button class="palette-cat-chip" data-cat="custom">Custom</button>
+      </div>
+
+      <!-- Skills List -->
+      <div class="palette-items-list skills-scroll-pane" id="skillsItemsList"></div>
+    </div>
+
+    <!-- Add Custom Skill Modal Dialog -->
+    <div class="modal-backdrop" id="addSkillModalBackdrop" inert>
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 class="modal-title">Create Custom Skill</h3>
+          <p class="modal-subtitle">Save reusable prompts for repetitive workflows</p>
+        </div>
+        <form id="addSkillForm" class="modal-form">
+          <div class="modal-form-group">
+            <label for="skillNameInput" class="modal-label">Skill Name</label>
+            <input
+              type="text"
+              id="skillNameInput"
+              class="modal-input"
+              placeholder="e.g. Code Reviewer, Executive Brief"
+              required
+              maxlength="50"
+            />
+          </div>
+          <div class="modal-form-group">
+            <label for="skillInstructionsInput" class="modal-label">Instructions &amp; Prompt</label>
+            <textarea
+              id="skillInstructionsInput"
+              class="modal-textarea"
+              placeholder="Specify the exact instructions the local LLM should follow using the page context..."
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancelAddSkillBtn" class="modal-btn secondary">Cancel</button>
+            <button type="submit" id="saveSkillBtn" class="modal-btn primary">Save Skill</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Settings Drawer / Modal -->
+    <aside class="settings-drawer" id="settingsDrawer" inert>
+      <div class="settings-header">
+        <h3>Engine Settings</h3>
+        <button id="closeSettingsBtn" class="action-icon-btn" aria-label="Close Settings">✕</button>
+      </div>
+
+      <div class="settings-content">
+        <!-- Provider Selection -->
+        <div class="form-group">
+          <label class="form-label">Local Model Provider</label>
+          <div class="radio-cards">
+            <label class="radio-card">
+              <input type="radio" name="providerOption" value="ollama">
+              <div class="radio-card-body">
+                <strong>🦙 Ollama Server</strong>
+                <small>Local server (Llama 3.2, Mistral, Qwen, DeepSeek)</small>
+              </div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="providerOption" value="chrome-builtin">
+              <div class="radio-card-body">
+                <strong>🟣 Chrome Built-in AI</strong>
+                <small>Gemini Nano on-device (Zero install)</small>
+              </div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="providerOption" value="custom">
+              <div class="radio-card-body">
+                <strong>⚙️ LM Studio / Custom Local</strong>
+                <small>OpenAI-compatible local endpoint</small>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Ollama Options -->
+        <div class="provider-fields" id="ollamaFields">
+          <div class="form-group">
+            <label for="ollamaUrlInput" class="form-label">Ollama Server Endpoint</label>
+            <input type="text" id="ollamaUrlInput" class="form-input" placeholder="http://127.0.0.1:11434" value="http://127.0.0.1:11434">
+          </div>
+          <div class="form-group">
+            <div class="label-with-action">
+              <label for="ollamaModelInput" class="form-label">Model Identifier</label>
+              <button type="button" id="fetchOllamaModelsBtn" class="link-btn">Detect Models</button>
+            </div>
+            <input type="text" id="ollamaModelInput" class="form-input" placeholder="llama3.2" value="llama3.2">
+            <select id="ollamaModelSelect" class="form-select" style="display: none;"></select>
+          </div>
+        </div>
+
+        <!-- Chrome Built-in Info -->
+        <div class="provider-fields" id="chromeBuiltinFields" style="display: none;">
+          <div class="info-box">
+            <p><strong>Gemini Nano Requirements:</strong></p>
+            <ul>
+              <li>Chrome 138+ (or Chrome Dev / Canary)</li>
+              <li>Enabled flags in <code>chrome://flags</code>:
+                <br>• <code>#optimization-guide-on-device-model</code> (Enabled BypassPerfRequirement)
+                <br>• <code>#prompt-api-for-gemini-nano</code> (Enabled)
+              </li>
+              <li>Check component status in <code>chrome://components</code></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Custom Local Server Options -->
+        <div class="provider-fields" id="customFields" style="display: none;">
+          <div class="form-group">
+            <label for="customUrlInput" class="form-label">Base URL</label>
+            <input type="text" id="customUrlInput" class="form-input" placeholder="http://127.0.0.1:1234/v1" value="http://127.0.0.1:1234/v1">
+            <small class="field-hint">Compatible with LM Studio, llama.cpp, LocalAI, vLLM.</small>
+          </div>
+          <div class="form-group">
+            <label for="customModelInput" class="form-label">Model Name</label>
+            <input type="text" id="customModelInput" class="form-input" placeholder="local-model" value="local-model">
+          </div>
+        </div>
+
+        <!-- Context Size Limit -->
+        <div class="form-group">
+          <div class="label-with-action">
+            <label for="maxCharsRange" class="form-label">Context Character Limit</label>
+            <span class="range-val" id="maxCharsDisplay">12,000 chars</span>
+          </div>
+          <input type="range" id="maxCharsRange" class="form-range" min="4000" max="30000" step="2000" value="12000">
+        </div>
+
+        <!-- Connection Test -->
+        <div class="test-connection-section">
+          <button type="button" id="testConnectionBtn" class="secondary-btn">
+            🔌 Ping Engine
+          </button>
+          <div id="testResult" class="test-result" style="display: none;"></div>
+        </div>
+      </div>
+
+      <div class="settings-footer">
+        <button type="button" id="saveSettingsBtn" class="primary-btn">Save Configuration</button>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>
