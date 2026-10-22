@@ -112,7 +112,7 @@ All data processing, model inference, and storage occur 100% locally on the user
 ## Privacy Policy
 
 **Privacy Policy URL** [REQUIRED]
-https://github.com/rabahmadani/tabmind/blob/main/PRIVACY.md
+https://github.com/rabah2026/tabmind/blob/master/PRIVACY.md
 
 ---
 
@@ -127,8 +127,8 @@ https://github.com/rabahmadani/tabmind/blob/main/PRIVACY.md
 
 **Publisher Name**: TabMind
 **Contact Email**: support@tabmind.local
-**Support URL**: https://github.com/rabahmadani/tabmind/issues
-**Homepage URL**: https://github.com/rabahmadani/tabmind
+**Support URL**: https://github.com/rabah2026/tabmind/issues
+**Homepage URL**: https://github.com/rabah2026/tabmind
 
 ---
 

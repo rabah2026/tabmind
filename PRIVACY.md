@@ -51,4 +51,4 @@ TabMind does not integrate with any third-party APIs, remote AI providers (OpenA
 If you have questions, feedback, or concerns regarding this privacy policy or TabMind, please reach out via GitHub or email:
 * **Developer**: TabMind Open Source Project
 * **Support Email**: support@tabmind.local (or your developer account email)
-* **Repository**: https://github.com/rabahmadani/tabmind
+* **Repository**: https://github.com/rabah2026/tabmind
