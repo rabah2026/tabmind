@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "TabMind - Local AI Tab Assistant",
   "version": "1.0.0",
-  "description": "Sidebar AI assistant using 100% local LLMs (Chrome Built-in AI, Ollama, LM Studio) to interact with and summarize opened tabs.",
+  "description": "Sidebar AI assistant using 100% local on-device models to interact with, analyze, and summarize open browser tabs.",
   "permissions": [
     "sidePanel",
     "tabs",

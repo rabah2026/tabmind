@@ -32,7 +32,7 @@ Zero external cloud API keys, zero tracking, and zero telemetry. Everything runs
 1. Open Google Chrome and navigate to `chrome://extensions/`.
 2. Toggle on **Developer mode** in the top-right corner.
 3. Click the **Load unpacked** button in the top-left.
-4. Select the project folder (`mysterious-lavoisier`).
+4. Select the project folder (`tabmind`).
 5. Pin **TabMind** to your Chrome toolbar and click the icon to open the side panel!
 
 ---

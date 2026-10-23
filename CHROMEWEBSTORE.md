@@ -9,7 +9,7 @@ TabMind - Local AI Tab Assistant
 
 **Short Description** [REQUIRED]
 <!-- Max 132 characters. Current: 124 characters -->
-Sidebar AI assistant using 100% local LLMs (Ollama, Gemini Nano) to analyze, summarize, and query open tabs with zero cloud tracking.
+Sidebar AI assistant using 100% local on-device models to interact with, analyze, and summarize open browser tabs.
 
 **Detailed Description** [REQUIRED]
 TabMind is a private, on-device AI sidebar assistant that interacts with your open browser tabs using local large language models. No cloud APIs, no subscriptions, and zero data leakage.
@@ -18,14 +18,14 @@ Transform how you browse, read, research, and work with tabs while keeping 100% 
 
 KEY FEATURES
 
-• 100% Local & Private AI: Runs entirely on your hardware using Ollama (Llama 3.2, Mistral, Qwen), Chrome Built-in AI (Gemini Nano via Prompt API), or LM Studio. No text or browsing data ever leaves your machine.
+• 100% Local & Private AI: Runs entirely on your hardware using your local AI runtime or Chrome's built-in on-device Prompt API. No text or browsing data ever leaves your machine.
 • Smart Tab Context: Ask questions, get explanations, extract action items, or generate takeaways from your active tab or across all open tabs in your window.
 • Context Continuity: Switch between tabs or select open tabs directly from the command dock. Clear centered context dividers keep track of your multi-tab research flow without losing conversation history.
 • 40+ Built-in Chrome Skills: Instant one-click workflows across Understand, Research, Learning, Food & Recipes, and Fun categories.
 • Custom Skill Creator: Build and save your own reusable custom AI prompts with distinct instructions.
 • Rich Markdown & Formatted Tables: Responses render with headers, lists, code syntax blocks with one-click copy, and organized data comparison tables.
 • One-Click Export: Download your conversation history as a clean, structured Markdown (.md) document anytime.
-• Bespoke Linear & Raycast Obsidian Design: High-contrast, keyboard-friendly command interface built for focused productivity.
+• Focused Dark Command Interface: High-contrast, keyboard-friendly sidebar interface built for distraction-free productivity.
 
 HOW TO USE TABMIND
 
@@ -37,9 +37,9 @@ HOW TO USE TABMIND
 
 LOCAL ENGINES SUPPORTED
 
-• Ollama: Native integration with auto-model detection (Llama 3.2, Gemma 2, Mistral, Qwen 2.5, Phi 3, DeepSeek, and more).
-• Chrome Built-in AI: Direct on-device Gemini Nano inference using Chrome's Prompt API.
-• Local OpenAI Endpoints: Connect to LM Studio, LocalAI, or vLLM running on localhost.
+• Ollama: Native local integration with automatic installed-model detection.
+• Chrome Built-in AI: Direct on-device inference using Chrome's built-in Prompt API.
+• Local OpenAI-Compatible Endpoints: Connect to any local inference server running on localhost.
 
 PRIVACY & DATA SAFETY
 
