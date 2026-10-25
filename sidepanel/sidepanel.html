@@ -404,6 +404,12 @@
                   <strong>Multi-Engine Freedom:</strong> Prefer Ollama (Llama 3.2, Mistral, DeepSeek) or LM Studio? Easily switch in Settings anytime.
                 </div>
               </div>
+              <div class="onboarding-feature">
+                <span class="onboarding-feature-icon">🛠️</span>
+                <div class="onboarding-feature-text">
+                  <strong>Verification &amp; Windows Fix:</strong> Check connection anytime with the <em>🔌 Ping Engine</em> test or built-in Windows launch guide in Settings.
+                </div>
+              </div>
             </div>
           </div>
 
@@ -508,17 +514,53 @@
           <div class="info-box">
             <p><strong>🟣 Gemini Nano (Chrome Built-in AI - Default):</strong></p>
             <ul>
-              <li><strong>Automatic Download:</strong> When you send your first prompt, Chrome lazily downloads model weights (~2–3.5 GB) with real-time percentage progress in chat.</li>
-              <li><strong>Supported Languages:</strong> English (primary optimization), with expanding native support for Spanish, Japanese, French, and German.</li>
+              <li><strong>Automatic Download:</strong> When you send your first prompt, Chrome lazily downloads model weights (~2–3.5 GB) with live percentage progress in chat.</li>
+              <li><strong>Supported Languages:</strong> English (optimized), Spanish, Japanese, French, and German.</li>
               <li><strong>Requirements:</strong> Chrome 138+ (Canary or Dev recommended if flag is missing in Stable) & at least 22 GB free disk space on drive <code>C:</code>.</li>
               <li><strong>Flags in <code>chrome://flags</code>:</strong>
                 <br>• <code>#prompt-api</code> (or <code>#prompt-api-for-gemini-nano</code>) → <code>Enabled</code>
                 <br>• <code>#optimization-guide-on-device-model</code> → <code>Enabled BypassPerfRequirement</code>
               </li>
-              <li><strong>Diagnostics:</strong> Check live model status at <code>chrome://on-device-internals</code> or update component in <code>chrome://components</code>.</li>
-              <li><strong>Windows Launch Fix (If flags hidden):</strong> Press <code>Win + R</code> and launch:<br><code>chrome.exe --enable-features=OptimizationGuideOnDeviceModel,PromptAPIForGeminiNano</code></li>
-              <li><strong>Verify Connected:</strong> Click <em>🔌 Ping Engine</em> below to test connectivity in 1-click.</li>
             </ul>
+          </div>
+
+          <!-- Windows Fix & Verification Guide Card -->
+          <div class="guide-card">
+            <div class="guide-card-header">
+              <span class="guide-card-icon">🛠️</span>
+              <div>
+                <strong>Windows Setup Fix &amp; Verification Guide</strong>
+                <small class="guide-card-sub">Follow this if Gemini Nano flags are hidden or not loading</small>
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <div class="guide-step-title">1. Windows Force-Launch Fix (If flags hidden)</div>
+              <p class="guide-step-p">Close Chrome completely, press <kbd>Win</kbd> + <kbd>R</kbd>, and run:</p>
+              <div class="code-snippet-box">
+                <code id="winCmdText">"C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-features=OptimizationGuideOnDeviceModel,PromptAPIForGeminiNano</code>
+                <button type="button" class="copy-snippet-btn" data-target="winCmdText" title="Copy Command">Copy</button>
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <div class="guide-step-title">2. Verify Connection (In F12 Console)</div>
+              <p class="guide-step-p">Press <kbd>F12</kbd> on any tab, open Console, and run:</p>
+              <div class="code-snippet-box">
+                <code id="consoleCheckText">await LanguageModel.availability();</code>
+                <button type="button" class="copy-snippet-btn" data-target="consoleCheckText" title="Copy Code">Copy</button>
+              </div>
+              <div class="guide-legend">
+                <span><code>"readily"</code> = Ready</span> &bull; 
+                <span><code>"after-download"</code> = Ready to download</span> &bull; 
+                <span><code>"no"</code> = Flags needed</span>
+              </div>
+            </div>
+
+            <div class="guide-section">
+              <div class="guide-step-title">3. Instant 1-Click Verification</div>
+              <p class="guide-step-p">Click the <strong>🔌 Ping Engine</strong> button below to test live connectivity directly from TabMind.</p>
+            </div>
           </div>
         </div>
 

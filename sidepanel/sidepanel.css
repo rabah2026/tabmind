@@ -1835,3 +1835,111 @@ html, body {
   align-items: center;
   gap: 8px;
 }
+
+/* Guide Card in Settings */
+.guide-card {
+  margin-top: 12px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 8px;
+}
+
+.guide-card-icon {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.guide-card-header strong {
+  font-size: 12px;
+  color: var(--text-primary);
+  display: block;
+}
+
+.guide-card-sub {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: block;
+}
+
+.guide-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.guide-step-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.guide-step-p {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.code-snippet-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 5px 8px;
+  gap: 8px;
+}
+
+.code-snippet-box code {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-cyan);
+  word-break: break-all;
+  white-space: pre-wrap;
+  line-height: 1.35;
+}
+
+.copy-snippet-btn {
+  background-color: var(--kbd-bg);
+  border: 1px solid var(--kbd-border);
+  color: var(--kbd-text);
+  border-radius: var(--radius-xs);
+  padding: 3px 7px;
+  font-size: 10px;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.copy-snippet-btn:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border-color: var(--accent-primary);
+}
+
+.guide-legend {
+  font-size: 9.5px;
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.guide-legend code {
+  color: var(--text-secondary);
+}

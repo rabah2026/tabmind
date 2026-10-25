@@ -1662,6 +1662,27 @@ function setupEventListeners() {
   });
 
   // Onboarding & Help Guide
+  // Copy snippet buttons in guides
+  document.querySelectorAll('.copy-snippet-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      const targetEl = document.getElementById(targetId);
+      const textToCopy = targetEl ? targetEl.innerText.trim() : '';
+      if (textToCopy) {
+        await navigator.clipboard.writeText(textToCopy);
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.style.backgroundColor = 'var(--status-online)';
+        btn.style.color = '#ffffff';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+        }, 1500);
+      }
+    });
+  });
+
   elements.helpBtn?.addEventListener('click', () => openOnboarding(1));
   elements.skipOnboardingBtn?.addEventListener('click', () => closeOnboarding(true));
   elements.onboardingBackBtn?.addEventListener('click', () => setOnboardingStep(currentOnboardingStep - 1));
