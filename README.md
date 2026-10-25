@@ -47,3 +47,41 @@ Zero external cloud API keys, zero tracking, and zero telemetry. Everything runs
 - **Category & Search**: Use category pills or the search box to find any of the 40+ built-in skills.
 - **Add Custom Skill**: In the Skills menu, click **`+ Add skill`** to define your own prompt template.
 - **Tab Context**: Type `@` or click **`+ Tab`** to switch between the active tab and other open tabs.
+
+
+---
+
+## 🛠️ Gemini Nano Verification & Windows Setup Guide
+
+If you are setting up TabMind on a new Windows device:
+
+### 1. Windows Launch Fix (If Flags Are Hidden in UI)
+If Chrome hides experimental flags under `chrome://flags`:
+1. Close all Chrome windows.
+2. Press `Win + R`, paste the command below, and press Enter:
+   ```cmd
+   "C:\Program Files\Google\Chrome\Application\chrome.exe" --enable-features=OptimizationGuideOnDeviceModel,PromptAPIForGeminiNano
+   ```
+
+### 2. How to Verify Gemini Nano Is Connected
+You can confirm that Chrome Built-in AI is active and connected using any of these 3 methods:
+
+* **Method A: In-App 1-Click Ping (Easiest)**
+  - In TabMind sidebar, click the **Gear (⚙️)** icon in the top header.
+  - Scroll down and click **🔌 Ping Engine**.
+  - If connected, you will see a green checkmark: `✔ Chrome Built-in AI (Gemini Nano) is ready!` (or `ready to download on first prompt`).
+
+* **Method B: Chrome Developer Console**
+  - Press `F12` on any webpage and go to the **Console** tab.
+  - Run:
+    ```javascript
+    await LanguageModel.availability();
+    ```
+  - Output meanings:
+    - `'readily'` → Connected and weights downloaded! Ready for instant inference.
+    - `'after-download'` → Connected! Submitting your first query will trigger the one-time background download.
+    - `'no'` → Features not enabled or disk space < 22 GB.
+
+* **Method C: Chrome Internal Dashboard**
+  - Navigate to `chrome://on-device-internals` in your URL bar.
+  - Click **Model Status** to see the exact downloaded model path and real-time inference capability.
