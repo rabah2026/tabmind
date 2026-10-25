@@ -489,12 +489,21 @@ const elements = {
   maxCharsRange: document.getElementById('maxCharsRange'),
   maxCharsDisplay: document.getElementById('maxCharsDisplay'),
   testConnectionBtn: document.getElementById('testConnectionBtn'),
-  testResult: document.getElementById('testResult')
+  testResult: document.getElementById('testResult'),
+
+  // Onboarding & Help
+  helpBtn: document.getElementById('helpBtn'),
+  onboardingModalBackdrop: document.getElementById('onboardingModalBackdrop'),
+  skipOnboardingBtn: document.getElementById('skipOnboardingBtn'),
+  onboardingBackBtn: document.getElementById('onboardingBackBtn'),
+  onboardingNextBtn: document.getElementById('onboardingNextBtn'),
+  onboardingDots: document.querySelectorAll('.onboarding-dot'),
+  onboardingSteps: document.querySelectorAll('.onboarding-step')
 };
 
 // Application State
 let appSettings = {
-  provider: 'ollama',
+  provider: 'chrome-builtin',
   ollamaUrl: 'http://127.0.0.1:11434',
   ollamaModel: 'llama3.2',
   customUrl: 'http://127.0.0.1:1234/v1',
@@ -528,6 +537,55 @@ chrome.tabs.onRemoved.addListener(async (closedTabId) => {
 
 const llmProvider = new LocalLLMProvider(appSettings);
 
+// Onboarding State & Flow
+let currentOnboardingStep = 1;
+
+function setOnboardingStep(step) {
+  currentOnboardingStep = Math.max(1, Math.min(3, step));
+  elements.onboardingSteps.forEach((el) => {
+    el.classList.toggle('active', parseInt(el.dataset.step, 10) === currentOnboardingStep);
+  });
+  elements.onboardingDots.forEach((el) => {
+    el.classList.toggle('active', parseInt(el.dataset.step, 10) === currentOnboardingStep);
+  });
+
+  if (currentOnboardingStep === 1) {
+    if (elements.onboardingBackBtn) elements.onboardingBackBtn.style.display = 'none';
+    if (elements.onboardingNextBtn) elements.onboardingNextBtn.textContent = 'Next →';
+  } else if (currentOnboardingStep === 2) {
+    if (elements.onboardingBackBtn) elements.onboardingBackBtn.style.display = 'inline-block';
+    if (elements.onboardingNextBtn) elements.onboardingNextBtn.textContent = 'Next →';
+  } else {
+    if (elements.onboardingBackBtn) elements.onboardingBackBtn.style.display = 'inline-block';
+    if (elements.onboardingNextBtn) elements.onboardingNextBtn.textContent = 'Get Started 🚀';
+  }
+}
+
+function openOnboarding(step = 1) {
+  setOnboardingStep(step);
+  if (elements.onboardingModalBackdrop) {
+    elements.onboardingModalBackdrop.inert = false;
+    elements.onboardingModalBackdrop.classList.add('open');
+  }
+}
+
+async function closeOnboarding(markCompleted = true) {
+  if (elements.onboardingModalBackdrop) {
+    elements.onboardingModalBackdrop.classList.remove('open');
+    elements.onboardingModalBackdrop.inert = true;
+  }
+  if (markCompleted) {
+    await chrome.storage.local.set({ hasSeenOnboarding: true });
+  }
+}
+
+async function checkFirstTimeOnboarding() {
+  const { hasSeenOnboarding } = await chrome.storage.local.get(['hasSeenOnboarding']);
+  if (!hasSeenOnboarding) {
+    openOnboarding(1);
+  }
+}
+
 // Initialization
 async function init() {
   await loadSettings();
@@ -549,6 +607,7 @@ async function init() {
   setupEventListeners();
   renderSkillsDropdown();
   await updateModelPillBadge();
+  await checkFirstTimeOnboarding();
 }
 
 // Settings Persistence
@@ -1600,6 +1659,24 @@ function setupEventListeners() {
 
     await updateModelPillBadge();
     await updateTabDisplay();
+  });
+
+  // Onboarding & Help Guide
+  elements.helpBtn?.addEventListener('click', () => openOnboarding(1));
+  elements.skipOnboardingBtn?.addEventListener('click', () => closeOnboarding(true));
+  elements.onboardingBackBtn?.addEventListener('click', () => setOnboardingStep(currentOnboardingStep - 1));
+  elements.onboardingNextBtn?.addEventListener('click', () => {
+    if (currentOnboardingStep < 3) {
+      setOnboardingStep(currentOnboardingStep + 1);
+    } else {
+      closeOnboarding(true);
+    }
+  });
+  elements.onboardingDots?.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const step = parseInt(dot.dataset.step, 10);
+      if (step) setOnboardingStep(step);
+    });
   });
 }
 

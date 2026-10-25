@@ -18,7 +18,10 @@ Zero external cloud API keys, zero tracking, and zero telemetry. Everything runs
   - **Fun**: *Hype it up!*, *Fun facts*, *Explain something in character*, *Dramatize content*.
 - **🔍 Search & Filter Skills**: Instant search bar and category tabs (`All`, `Understand`, `Research`, `Shopping`, `Writing`, `Learning`, `Fun`, `Your skills`).
 - **➕ Custom Skills**: Create, edit, and delete your own custom skills with specific instructions via the **"Add skill"** dialog.
-- **🔒 100% Local & Private**: Supports **Chrome Built-in AI (Gemini Nano)**, **Ollama**, and **LM Studio / llama.cpp**. No data leaves your computer.
+- **🟣 Gemini Nano Out-of-the-Box (Default)**: Uses Chrome's built-in Prompt API by default with zero external server setup. When enabled, your first question automatically triggers Chrome to download local model weights (~2–3.5 GB) with real-time percentage progress displayed in chat.
+- **🌐 Supported Languages**: Optimized for English (`en`), with native multilingual support for Spanish (`es`), Japanese (`ja`), French (`fr`), and German (`de`).
+- **🚀 First-Time Interactive Onboarding**: A 3-step quick tour guides new users through private on-device intelligence, Gemini Nano capabilities, and command shortcuts. Re-open anytime with the `?` Help button.
+- **🔒 100% Local & Private**: No data leaves your computer. Supports Chrome Built-in AI, Ollama, and LM Studio.
 - **📑 Tab Auto-Tracking**: Automatically detects the active tab or type `@` to switch target tabs.
 - **✨ Highlighted Text Awareness**: When you highlight text on a webpage, TabMind detects the excerpt for targeted questions.
 - **🎨 Native Chrome Side Panel Aesthetic**: Matches Chrome's clean Ask Gemini interface with dark and light mode support.

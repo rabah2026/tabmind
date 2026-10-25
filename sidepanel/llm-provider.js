@@ -2,7 +2,7 @@
 
 export class LocalLLMProvider {
   constructor(config = {}) {
-    this.provider = config.provider || 'ollama'; // 'ollama' | 'chrome-builtin' | 'custom'
+    this.provider = config.provider || 'chrome-builtin'; // 'chrome-builtin' (default) | 'ollama' | 'custom'
     this.ollamaUrl = (config.ollamaUrl || 'http://127.0.0.1:11434').replace(/\/+$/, '');
     this.ollamaModel = config.ollamaModel || 'llama3.2';
     this.customUrl = (config.customUrl || 'http://127.0.0.1:1234/v1').replace(/\/+$/, '');
@@ -107,7 +107,7 @@ export class LocalLLMProvider {
     return {
       ok: false,
       provider: 'chrome-builtin',
-      message: 'Chrome Built-in Prompt API is not enabled. In Chrome Canary/Dev, enable chrome://flags/#optimization-guide-on-device-model and chrome://flags/#prompt-api-for-gemini-nano, or switch to Ollama.'
+      message: 'Chrome Built-in Prompt API is not active. Enable chrome://flags/#prompt-api and chrome://flags/#optimization-guide-on-device-model (BypassPerfRequirement), ensure 22GB+ free disk space, or switch to Ollama.'
     };
   }
 

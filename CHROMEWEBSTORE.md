@@ -136,4 +136,5 @@ https://github.com/rabah2026/tabmind/blob/master/PRIVACY.md
 
 | Version | Date | Changes | Status |
 | :--- | :--- | :--- | :--- |
-| 1.0.0 | 2026-10-21 | Initial release with Ollama & Gemini Nano local AI support, 40+ Chrome skills, custom skills, and tab context switching. | Draft |
+| 1.0.1 | 2026-10-25 | Set Gemini Nano as default engine, added first-time interactive onboarding tour, multi-language guidance, and real-time model download progress. | Draft |
+| 1.0.0 | 2026-10-21 | Initial release with Ollama & Gemini Nano local AI support, 40+ Chrome skills, custom skills, and tab context switching. | Published |

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TabMind - Local AI Tab Assistant",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sidebar AI assistant using 100% local on-device models to interact with, analyze, and summarize open browser tabs.",
   "permissions": [
     "sidePanel",
