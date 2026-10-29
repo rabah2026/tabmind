@@ -1,8 +1,47 @@
 # TabMind 🧠 — Local AI Tab Assistant
 
+<p align="center">
+  <a href="https://chromewebstore.google.com/detail/tabmind-local-ai-tab-assi/hnphfoholpninokgckbkdbbpmhffdkla">
+    <img src="https://img.shields.io/badge/Chrome%20Web%20Store-Available%20Now-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Available in the Chrome Web Store" />
+  </a>
+  <a href="https://chromewebstore.google.com/detail/tabmind-local-ai-tab-assi/hnphfoholpninokgckbkdbbpmhffdkla">
+    <img src="https://img.shields.io/chrome-web-store/v/hnphfoholpninokgckbkdbbpmhffdkla?style=for-the-badge&logo=googlechrome&logoColor=white&color=blue" alt="Chrome Web Store Version" />
+  </a>
+  <a href="https://chromewebstore.google.com/detail/tabmind-local-ai-tab-assi/hnphfoholpninokgckbkdbbpmhffdkla">
+    <img src="https://img.shields.io/chrome-web-store/users/hnphfoholpninokgckbkdbbpmhffdkla?style=for-the-badge&color=green" alt="Chrome Web Store Users" />
+  </a>
+  <a href="https://github.com/rabah2026/tabmind/blob/main/PRIVACY.md">
+    <img src="https://img.shields.io/badge/Privacy-100%25%20On--Device-success?style=for-the-badge&logo=shield" alt="100% Local & Private" />
+  </a>
+</p>
+
 > **A clean, direct Chrome extension with one single purpose:** A sidebar AI assistant that interacts with your open browser tabs using **100% local, on-device LLMs**.
 
 Zero external cloud API keys, zero tracking, and zero telemetry. Everything runs on your machine.
+
+---
+
+## 🚀 Quick Start & Installation
+
+### Option 1: Install from Chrome Web Store (Recommended)
+
+Get the latest stable release directly with automatic updates:
+
+👉 [**Add TabMind to Chrome (Chrome Web Store)**](https://chromewebstore.google.com/detail/tabmind-local-ai-tab-assi/hnphfoholpninokgckbkdbbpmhffdkla)
+
+---
+
+### Option 2: Load Unpacked from Source (Developer Mode)
+
+1. Clone or download this repository:
+   ```bash
+   git clone https://github.com/rabah2026/tabmind.git
+   ```
+2. Open Google Chrome and navigate to `chrome://extensions/`.
+3. Toggle on **Developer mode** in the top-right corner.
+4. Click the **Load unpacked** button in the top-left.
+5. Select the `tabmind` directory.
+6. Pin **TabMind** to your Chrome toolbar and click the icon to open the side panel!
 
 ---
 
@@ -25,18 +64,6 @@ Zero external cloud API keys, zero tracking, and zero telemetry. Everything runs
 - **📑 Tab Auto-Tracking**: Automatically detects the active tab or type `@` to switch target tabs.
 - **✨ Highlighted Text Awareness**: When you highlight text on a webpage, TabMind detects the excerpt for targeted questions.
 - **🎨 Native Chrome Side Panel Aesthetic**: Matches Chrome's clean Ask Gemini interface with dark and light mode support.
-
----
-
-## 🚀 Quick Start & Installation
-
-### 1. Load the Extension into Chrome
-
-1. Open Google Chrome and navigate to `chrome://extensions/`.
-2. Toggle on **Developer mode** in the top-right corner.
-3. Click the **Load unpacked** button in the top-left.
-4. Select the project folder (`tabmind`).
-5. Pin **TabMind** to your Chrome toolbar and click the icon to open the side panel!
 
 ---
 
