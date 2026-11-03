@@ -45,6 +45,32 @@ Get the latest stable release directly with automatic updates:
 
 ---
 
+## 📸 Screenshots
+
+| 1. Wikipedia Summary Table | 2. GitHub Cross-Tab Context |
+|:---:|:---:|
+| <img src="store_assets/screenshot-1-overview.jpg" width="480" alt="Wikipedia Summary Table" /> | <img src="store_assets/screenshot-2-context-switch.jpg" width="480" alt="GitHub Cross-Tab Context" /> |
+| **3. arXiv 40+ Skills Catalog** | **4. Local Engines & Verification** |
+| <img src="store_assets/screenshot-3-skills-catalog.jpg" width="480" alt="arXiv Skills Catalog" /> | <img src="store_assets/screenshot-4-local-engines.jpg" width="480" alt="Local Engines Settings" /> |
+
+---
+
+## 🌍 الوصف باللغة العربية (Arabic Overview)
+
+> **مساعد ذكاء اصطناعي محلي 100% في الشريط الجانبي لمتصفح كروم.**
+
+تطبيق **TabMind** هو إضافة لمتصفح جوجل كروم تمنحك شريطاً جانبياً ذكياً يتفاعل مع التبويبات المفتوحة ويحللها ويلخصها باستخدام **نماذج ذكاء اصطناعي تعمل محلياً بالكامل على جهازك** (مثل Gemini Nano المدمج في كروم، وOllama، وLM Studio).
+
+### المميزات الرئيسية:
+- **🔒 خصوصية تامة وبدون خوادم سحابية**: لا حاجة لمفاتيح API ولا اشتراكات شهرية، وبيانات تصفحك لا تغادر حاسوبك مطلقاً.
+- **📑 سياق التبويبات واستمرارية البحث**: اسأل عن التبويب النشط أو التبويبات المتعددة مع فواصل سياقية ذكية تحافظ على تسلسل أفكارك.
+- **⚡ أكثر من 40 مهارة جاهزة (`/`)**: تلخيص في جداول، شرح مبسط، استخراج مهام، بطاقات استذكار، وصياغة احترافية بنقرة واحدة.
+- **🛠️ دعم محركات متعددة بنقرة زر**: فحص فوري وسهل لحالة المحرك المدمج في كروم أو خادمك المحلي.
+
+👉 **[تثبيت الإضافة من متجر كروم الإلكتروني](https://chromewebstore.google.com/detail/tabmind-local-ai-tab-assi/hnphfoholpninokgckbkdbbpmhffdkla)**
+
+---
+
 ## ✨ Features
 
 - **🎯 Per-Tab Isolated Sessions**: Each tab gets its own clean, independent sidebar session. Opening a new tab gives you a fresh start automatically, without clutter from previous tabs.

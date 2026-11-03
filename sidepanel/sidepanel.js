@@ -579,6 +579,84 @@ async function closeOnboarding(markCompleted = true) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Review prompt — politely asks engaged users for a Chrome Web Store review.
+// Shown only after real usage (successful answers over multiple days), at most
+// once per sidebar session, and never again once the user rates or declines.
+// ---------------------------------------------------------------------------
+const REVIEW_URL = 'https://chromewebstore.google.com/detail/hnphfoholpninokgckbkdbbpmhffdkla/reviews';
+const REVIEW_MIN_ANSWERS = 5;
+const REVIEW_MIN_DAYS = 2;
+const REVIEW_SNOOZE_ANSWERS = 15;
+let reviewPromptShownThisSession = false;
+
+async function getReviewState() {
+  const { reviewState } = await chrome.storage.local.get('reviewState');
+  return {
+    successCount: 0,
+    firstUseAt: Date.now(),
+    nextPromptAt: REVIEW_MIN_ANSWERS,
+    done: false,
+    ...(reviewState || {})
+  };
+}
+
+async function setReviewState(state) {
+  await chrome.storage.local.set({ reviewState: state });
+}
+
+async function recordSuccessfulAnswer() {
+  const state = await getReviewState();
+  state.successCount += 1;
+  await setReviewState(state);
+
+  if (state.done || reviewPromptShownThisSession) return;
+  const daysUsed = (Date.now() - state.firstUseAt) / 86400000;
+  if (state.successCount >= state.nextPromptAt && daysUsed >= REVIEW_MIN_DAYS) {
+    showReviewPrompt();
+  }
+}
+
+function showReviewPrompt() {
+  reviewPromptShownThisSession = true;
+  const card = document.createElement('div');
+  card.className = 'review-card';
+  card.setAttribute('role', 'status');
+  card.innerHTML = `
+    <div class="review-card-title">Enjoying TabMind? ⭐</div>
+    <div class="review-card-text">
+      If TabMind has been helpful, a quick review on the Chrome Web Store helps other people discover private, on-device AI. It only takes a moment.
+    </div>
+    <div class="review-card-actions">
+      <button type="button" class="review-btn primary" data-action="rate">⭐ Rate TabMind</button>
+      <button type="button" class="review-btn" data-action="later">Maybe later</button>
+      <button type="button" class="review-btn subtle" data-action="never">No thanks</button>
+    </div>
+  `;
+
+  card.addEventListener('click', async (e) => {
+    const action = e.target.closest('button')?.dataset.action;
+    if (!action) return;
+    const state = await getReviewState();
+    if (action === 'rate') {
+      chrome.tabs.create({ url: REVIEW_URL });
+      state.done = true;
+      card.innerHTML = '<div class="review-card-text">Thank you so much for your support! 💜</div>';
+      setTimeout(() => card.remove(), 3000);
+    } else if (action === 'later') {
+      state.nextPromptAt = state.successCount + REVIEW_SNOOZE_ANSWERS;
+      card.remove();
+    } else if (action === 'never') {
+      state.done = true;
+      card.remove();
+    }
+    await setReviewState(state);
+  });
+
+  elements.messagesList.appendChild(card);
+  scrollToBottom();
+}
+
 async function checkFirstTimeOnboarding() {
   const { hasSeenOnboarding } = await chrome.storage.local.get(['hasSeenOnboarding']);
   if (!hasSeenOnboarding) {
@@ -1242,6 +1320,10 @@ async function handleSendMessage(text) {
     });
     actions.appendChild(copyBtn);
     assistantWrapper.appendChild(actions);
+
+    if (fullResponseText && !fullResponseText.startsWith('(Empty response')) {
+      recordSuccessfulAnswer().catch((e) => console.warn('Review state update failed:', e));
+    }
 
   } catch (err) {
     if (err.name === 'AbortError') {

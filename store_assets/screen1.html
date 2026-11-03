@@ -52,19 +52,25 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      max-width: 200px;
+      max-width: 220px;
     }
     .tab.active {
-      background: #090d16;
-      color: #f8fafc;
-      font-weight: 500;
-      border-top: 2px solid #6366f1;
+      background: #ffffff;
+      color: #1e293b;
+      font-weight: 600;
+      border-top: 2px solid #3b82f6;
     }
     .nav-bar {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-top: 6px;
+    }
+    .nav-btn {
+      color: #94a3b8;
+      font-size: 14px;
+      display: flex;
+      gap: 8px;
     }
     .url-bar {
       flex: 1;
@@ -76,19 +82,22 @@
       align-items: center;
       padding: 0 12px;
       font-size: 11.5px;
-      color: #94a3b8;
+      color: #cbd5e1;
       gap: 8px;
     }
+    .url-bar .host { color: #f8fafc; font-weight: 500; }
+    .url-bar .path { color: #94a3b8; }
     .ext-icon-badge {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: rgba(99, 102, 241, 0.2);
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(6, 182, 212, 0.2));
       border: 1px solid rgba(99, 102, 241, 0.5);
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
       font-size: 11px;
       color: #c7d2fe;
+      font-weight: 600;
     }
 
     /* Main Viewport Split */
@@ -97,66 +106,171 @@
       flex: 1;
       height: calc(800px - 74px);
     }
-    /* Web Page Content */
+
+    /* Web Page Content — Authentic Wikipedia Article */
     .page-content {
       flex: 1;
-      background: #0b0f19;
-      padding: 36px 48px;
-      overflow-y: auto;
-      border-right: 1px solid #1e293b;
+      background: #ffffff;
+      color: #202122;
+      padding: 24px 36px 36px;
+      overflow-y: hidden;
+      border-right: 1px solid #cbd5e1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Nimbus Roman No9 L", "Times New Roman", Times, serif;
+      position: relative;
     }
-    .article-tag {
-      font-size: 11px;
-      font-weight: 600;
-      color: #818cf8;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    .article-title {
-      font-size: 26px;
-      font-weight: 800;
-      line-height: 1.25;
-      letter-spacing: -0.5px;
+    .wiki-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 10px;
       margin-bottom: 14px;
-      background: linear-gradient(135deg, #ffffff 40%, #cbd5e1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
-    .article-lead {
-      font-size: 14px;
-      color: #94a3b8;
-      line-height: 1.6;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #1e293b;
+    .wiki-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .article-box {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 18px;
+    .wiki-globe {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #475569;
+      border: 1px solid #94a3b8;
     }
-    .article-box h3 {
-      font-size: 14px;
+    .wiki-titles h2 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: #000;
+      font-family: "Linux Libertine", "Georgia", Times, serif;
+    }
+    .wiki-titles span {
+      font-size: 10px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+    .wiki-search {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      border-radius: 2px;
+      padding: 4px 10px;
+      font-size: 11px;
+      color: #72777d;
+      width: 180px;
+      font-family: sans-serif;
+    }
+    .wiki-page-title {
+      font-size: 28px;
+      font-weight: 400;
+      font-family: "Linux Libertine", "Georgia", Times, serif;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+      color: #000000;
+    }
+    .wiki-tagline {
+      font-size: 11.5px;
+      color: #54595d;
+      margin-bottom: 16px;
+      font-style: italic;
+      font-family: sans-serif;
+    }
+
+    .wiki-body-layout {
+      display: flex;
+      gap: 20px;
+      font-family: sans-serif;
+    }
+    .wiki-text-col {
+      flex: 1;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #202122;
+    }
+    .wiki-text-col p {
+      margin-bottom: 12px;
+    }
+    .wiki-text-col a {
+      color: #3366cc;
+      text-decoration: none;
+    }
+    .wiki-text-col a:hover {
+      text-decoration: underline;
+    }
+
+    /* Wikipedia Infobox */
+    .wiki-infobox {
+      width: 250px;
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      padding: 10px;
+      font-size: 11px;
+      line-height: 1.4;
+      border-radius: 2px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .infobox-title {
+      text-align: center;
+      font-weight: 700;
+      font-size: 12px;
+      background: #e2e8f0;
+      padding: 6px 4px;
       margin-bottom: 8px;
-      color: #38bdf8;
+      border-radius: 2px;
     }
-    .article-box p {
-      font-size: 12.5px;
-      color: #64748b;
-      line-height: 1.5;
+    .infobox-art {
+      background: #0f172a;
+      height: 110px;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #f8fafc;
+      margin-bottom: 8px;
+      border: 1px solid #cbd5e1;
+      position: relative;
+      overflow: hidden;
     }
+    .gold-hexagon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .infobox-art-label {
+      font-size: 9.5px;
+      color: #cbd5e1;
+      margin-top: 6px;
+    }
+    .infobox-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #eaecf0;
+      padding: 4px 0;
+    }
+    .infobox-label { font-weight: 600; color: #54595d; }
+    .infobox-val { text-align: right; color: #202122; }
 
     /* TabMind Sidebar */
     .sidebar {
-      width: 420px;
-      background: #070a12;
+      width: 440px;
+      background: #090d16;
       display: flex;
       flex-direction: column;
       border-left: 1px solid #1e293b;
-      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.4);
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
     }
     .side-header {
       height: 48px;
@@ -165,7 +279,7 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #1e293b;
-      background: #090d16;
+      background: #0f172a;
     }
     .brand {
       display: flex;
@@ -173,11 +287,11 @@
       gap: 8px;
     }
     .brand-logo svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
     }
     .brand-name {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
       color: #f8fafc;
       letter-spacing: -0.2px;
@@ -186,23 +300,23 @@
       font-size: 8.5px;
       font-weight: 700;
       font-family: monospace;
-      padding: 1px 5px;
+      padding: 2px 6px;
       border-radius: 4px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
     }
     .header-btns {
       display: flex;
-      gap: 4px;
+      gap: 5px;
     }
     .h-btn {
       width: 26px;
       height: 26px;
-      border-radius: 5px;
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      color: #94a3b8;
+      border-radius: 6px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -222,23 +336,25 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      padding: 3px 10px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      padding: 4px 10px;
       border-radius: 12px;
       font-size: 11px;
       color: #c7d2fe;
+      font-weight: 500;
       align-self: flex-start;
     }
     .msg-user {
       align-self: flex-end;
       background: linear-gradient(135deg, #4f46e5, #6366f1);
       color: #ffffff;
-      padding: 8px 12px;
-      border-radius: 12px 12px 2px 12px;
-      font-size: 12.5px;
-      max-width: 88%;
-      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+      padding: 8px 13px;
+      border-radius: 14px 14px 3px 14px;
+      font-size: 12px;
+      max-width: 90%;
+      line-height: 1.45;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
     }
     .msg-ai {
       align-self: flex-start;
@@ -250,9 +366,9 @@
     .msg-table-wrap {
       margin: 8px 0;
       border: 1px solid #1e293b;
-      border-radius: 6px;
+      border-radius: 8px;
       overflow: hidden;
-      background: #090d16;
+      background: #0d1322;
     }
     table {
       width: 100%;
@@ -260,7 +376,7 @@
       font-size: 11px;
     }
     th {
-      background: #0f172a;
+      background: #162032;
       color: #f1f5f9;
       font-weight: 600;
       padding: 6px 8px;
@@ -273,7 +389,7 @@
       color: #94a3b8;
     }
     tr:last-child td { border-bottom: none; }
-    .badge-privacy {
+    .badge-local {
       background: rgba(16, 185, 129, 0.15);
       color: #34d399;
       padding: 1px 5px;
@@ -281,11 +397,19 @@
       font-size: 9.5px;
       font-weight: 600;
     }
+    .ai-footer-note {
+      font-size: 10.5px;
+      color: #64748b;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     /* Context Pill Bar */
     .context-bar {
       padding: 6px 12px;
-      background: #090d16;
+      background: #0f172a;
       border-top: 1px solid #1e293b;
       display: flex;
       align-items: center;
@@ -295,13 +419,13 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #0f172a;
-      border: 1px solid #1e293b;
+      background: #1e293b;
+      border: 1px solid #334155;
       border-radius: 12px;
-      padding: 3px 9px;
+      padding: 3px 10px;
       font-size: 10.5px;
-      color: #94a3b8;
-      max-width: 270px;
+      color: #cbd5e1;
+      max-width: 290px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -316,7 +440,7 @@
     .input-box {
       background: #0f172a;
       border: 1px solid #334155;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 8px 10px;
       display: flex;
       flex-direction: column;
@@ -334,7 +458,12 @@
     .tools-left {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+    }
+    .tool-shortcut {
+      font-size: 11px;
+      color: #94a3b8;
+      cursor: pointer;
     }
     .model-pill {
       display: flex;
@@ -350,15 +479,16 @@
     }
     .dot-green { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
     .send-btn {
-      width: 24px;
-      height: 24px;
-      border-radius: 5px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
       background: #6366f1;
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -370,41 +500,93 @@
       <div class="w-dot w-green"></div>
       <div class="browser-tabs">
         <div class="tab active">
-          <span>⚡</span>
-          <span>Local AI Architecture...</span>
+          <span>🪐</span>
+          <span>James Webb Space Telescope - Wikipedia</span>
         </div>
         <div class="tab">
-          <span>📄</span>
-          <span>GitHub - llama.cpp</span>
+          <span>🐙</span>
+          <span>GitHub - ggerganov/llama.cpp</span>
         </div>
       </div>
     </div>
     <div class="nav-bar">
+      <div class="nav-btn"><span>‹</span><span>›</span><span>↻</span></div>
       <div class="url-bar">
         <span>🔒</span>
-        <span>https://techblog.io/deep-dive/local-ai-agents</span>
+        <span class="host">en.wikipedia.org</span><span class="path">/wiki/James_Webb_Space_Telescope</span>
       </div>
       <div class="ext-icon-badge">
-        <span>💎</span>
+        <span>🧠</span>
         <span>TabMind Side Panel</span>
       </div>
     </div>
   </div>
 
   <div class="viewport">
+    <!-- Real Wikipedia Page Content -->
     <div class="page-content">
-      <div class="article-tag">Architecture Guide</div>
-      <h1 class="article-title">High-Performance On-Device AI Runtimes</h1>
-      <p class="article-lead">
-        Deploying large language models directly into client environments preserves user privacy, eliminates per-token API charges, and guarantees offline availability.
-      </p>
-      <div class="article-box">
-        <h3>1. Memory & Quantization Optimization</h3>
-        <p>4-bit and 8-bit quantized weights allow models up to 7 billion parameters to run in under 4GB of RAM at lightning-fast token generation speeds.</p>
+      <div class="wiki-header">
+        <div class="wiki-brand">
+          <div class="wiki-globe">W</div>
+          <div class="wiki-titles">
+            <h2>WIKIPEDIA</h2>
+            <span>The Free Encyclopedia</span>
+          </div>
+        </div>
+        <div class="wiki-search">Search Wikipedia</div>
       </div>
-      <div class="article-box">
-        <h3>2. Full Air-Gapped Data Isolation</h3>
-        <p>Enterprise workloads require strict containment where sensitive source code and user documents are never transmitted over public networks.</p>
+
+      <h1 class="wiki-page-title">James Webb Space Telescope</h1>
+      <div class="wiki-tagline">From Wikipedia, the free encyclopedia</div>
+
+      <div class="wiki-body-layout">
+        <div class="wiki-text-col">
+          <p>
+            The <strong>James Webb Space Telescope</strong> (<strong>JWST</strong>) is a space telescope designed primarily to conduct <a href="#">infrared astronomy</a>. As the largest optical telescope in space, its high resolution and sensitivity allow it to view objects too old, distant, or faint for the <a href="#">Hubble Space Telescope</a>.
+          </p>
+          <p>
+            This enables investigations across many fields of <a href="#">astronomy</a> and <a href="#">cosmology</a>, such as observation of the first stars and the formation of the first galaxies, and detailed atmospheric characterization of potentially habitable <a href="#">exoplanets</a>.
+          </p>
+          <p>
+            The <a href="#">U.S. National Aeronautics and Space Administration (NASA)</a> led JWST's development in collaboration with the <a href="#">European Space Agency (ESA)</a> and the <a href="#">Canadian Space Agency (CSA)</a>.
+          </p>
+          <p>
+            JWST was launched on 25 December 2021 on an <a href="#">Ariane 5</a> rocket from Kourou, French Guiana, and arrived at the Sun–Earth L<sub>2</sub> Lagrange point in January 2022.
+          </p>
+        </div>
+
+        <!-- Wikipedia Infobox -->
+        <div class="wiki-infobox">
+          <div class="infobox-title">James Webb Space Telescope</div>
+          <div class="infobox-art">
+            <div class="gold-hexagon">🔭</div>
+            <div class="infobox-art-label">6.5 m Primary Mirror Array</div>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Operator</span>
+            <span class="infobox-val">NASA / ESA / CSA</span>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Launch date</span>
+            <span class="infobox-val">25 Dec 2021</span>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Orbital insertion</span>
+            <span class="infobox-val">24 Jan 2022</span>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Target orbit</span>
+            <span class="infobox-val">Sun–Earth L<sub>2</sub> halo</span>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Primary mirror</span>
+            <span class="infobox-val">6.5 m (21.3 ft)</span>
+          </div>
+          <div class="infobox-row">
+            <span class="infobox-label">Focal length</span>
+            <span class="infobox-val">131.4 m (431 ft)</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -419,7 +601,7 @@
             </svg>
           </div>
           <span class="brand-name">TabMind</span>
-          <span class="brand-tag">LOCAL ENGINE</span>
+          <span class="brand-tag">ON-DEVICE AI</span>
         </div>
         <div class="header-btns">
           <div class="h-btn" title="New Chat">＋</div>
@@ -436,53 +618,57 @@
         </div>
 
         <div class="msg-user">
-          Summarize on-device runtime comparison from this page.
+          Summarize the 4 core scientific instruments and their wavelength coverage from this page.
         </div>
 
         <div class="msg-ai">
-          <p>Here is the structured breakdown of local AI engines running directly on your hardware:</p>
+          <p>Here is the structured comparison of the 4 primary science instruments on the James Webb Space Telescope:</p>
           <div class="msg-table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Runtime</th>
-                  <th>RAM</th>
-                  <th>Speed</th>
-                  <th>Privacy</th>
+                  <th>Instrument</th>
+                  <th>Wavelength</th>
+                  <th>Key Science Mission</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Ollama (Llama 3.2)</strong></td>
-                  <td>2.4 GB</td>
-                  <td>~45 t/s</td>
-                  <td><span class="badge-privacy">100% Local</span></td>
+                  <td><strong>NIRCam</strong></td>
+                  <td>0.6 – 5.0 μm</td>
+                  <td>First stars, galaxy clusters & exoplanet imaging</td>
                 </tr>
                 <tr>
-                  <td><strong>Gemini Nano (Chrome)</strong></td>
-                  <td>1.8 GB</td>
-                  <td>~60 t/s</td>
-                  <td><span class="badge-privacy">On-Device</span></td>
+                  <td><strong>NIRSpec</strong></td>
+                  <td>0.6 – 5.3 μm</td>
+                  <td>Multi-object spectroscopy of 100 simultaneous targets</td>
                 </tr>
                 <tr>
-                  <td><strong>LM Studio / Local</strong></td>
-                  <td>3.1 GB</td>
-                  <td>~40 t/s</td>
-                  <td><span class="badge-privacy">100% Local</span></td>
+                  <td><strong>MIRI</strong></td>
+                  <td>4.9 – 28.8 μm</td>
+                  <td>Mid-infrared imaging of redshifted distant galaxies & dust</td>
+                </tr>
+                <tr>
+                  <td><strong>FGS / NIRISS</strong></td>
+                  <td>0.6 – 5.0 μm</td>
+                  <td>High-precision navigation & transit spectroscopy</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p>All engines process context in memory without sending data off your machine.</p>
+          <div class="ai-footer-note">
+            <span class="badge-local">100% On-Device</span>
+            <span>Processed locally via Chrome Built-in AI (Gemini Nano)</span>
+          </div>
         </div>
       </div>
 
       <div class="context-bar">
         <div class="tab-pill">
-          <span>📄</span>
-          <span>Sharing "High-Performance On-Device AI Runtimes"</span>
+          <span>🪐</span>
+          <span>James Webb Space Telescope - Wikipedia</span>
         </div>
-        <span style="font-size: 10px; color: #64748b;">Active Tab</span>
+        <span style="font-size: 10px; color: #10b981; font-weight: 600;">● Active Tab</span>
       </div>
 
       <div class="input-dock">
@@ -490,11 +676,11 @@
           <div class="input-placeholder">Ask anything about this tab... (@ tab, / skill)</div>
           <div class="dock-tools">
             <div class="tools-left">
-              <span style="font-size: 11px; color: #94a3b8;">/ Skills</span>
-              <span style="font-size: 11px; color: #94a3b8;">@ Tabs</span>
+              <span class="tool-shortcut">/ Skills</span>
+              <span class="tool-shortcut">@ Tabs</span>
               <div class="model-pill">
                 <span class="dot-green"></span>
-                <span>llama3.2</span>
+                <span>Gemini Nano</span>
               </div>
             </div>
             <div class="send-btn">↑</div>

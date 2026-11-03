@@ -448,6 +448,82 @@ html, body {
   background-color: var(--bg-surface-elevated);
 }
 
+/* Review Prompt Card */
+.review-card {
+  margin: 8px 0 4px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  animation: reviewFadeIn 0.3s ease;
+}
+
+@keyframes reviewFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.review-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.review-card-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.review-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.review-btn {
+  font-family: inherit;
+  font-size: 11.5px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-medium);
+  background: var(--bg-surface-elevated);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.review-btn:hover { background: var(--bg-surface-hover); }
+
+.review-btn.primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.review-btn.primary:hover { background: var(--accent-primary-hover); }
+
+.review-btn.subtle {
+  background: none;
+  border-color: transparent;
+  color: var(--text-muted);
+}
+
+.settings-rate-link {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.settings-rate-link:hover { color: var(--accent-primary); }
+
 /* Markdown Rendering */
 .md-h2, .md-h3, .md-h4 {
   font-weight: 700;

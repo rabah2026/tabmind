@@ -23,6 +23,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 8px 12px 6px;
+      user-select: none;
     }
     .window-controls { display: flex; align-items: center; gap: 7px; }
     .w-dot { width: 11px; height: 11px; border-radius: 50%; }
@@ -39,9 +40,11 @@
       display: flex;
       align-items: center;
       gap: 7px;
+      max-width: 240px;
     }
-    .tab.active { background: #090d16; color: #f8fafc; font-weight: 500; border-top: 2px solid #8b5cf6; }
+    .tab.active { background: #f8fafc; color: #0f172a; font-weight: 600; border-top: 2px solid #8b5cf6; }
     .nav-bar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-btn { color: #94a3b8; font-size: 14px; display: flex; gap: 8px; }
     .url-bar {
       flex: 1;
       height: 28px;
@@ -52,19 +55,119 @@
       align-items: center;
       padding: 0 12px;
       font-size: 11.5px;
-      color: #94a3b8;
+      color: #cbd5e1;
       gap: 8px;
     }
-    .viewport { display: flex; flex: 1; height: calc(800px - 74px); position: relative; }
-    .page-content { flex: 1; background: #0b0f19; padding: 36px 48px; border-right: 1px solid #1e293b; }
+    .url-bar .host { color: #f8fafc; font-weight: 500; }
+    .url-bar .path { color: #94a3b8; }
+    .ext-icon-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(139, 92, 246, 0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #d8b4fe;
+      font-weight: 600;
+    }
 
+    /* Main Viewport Split */
+    .viewport { display: flex; flex: 1; height: calc(800px - 74px); }
+
+    /* arXiv Paper Content */
+    .page-content {
+      flex: 1;
+      background: #ffffff;
+      color: #222222;
+      padding: 24px 36px 36px;
+      overflow-y: hidden;
+      border-right: 1px solid #cbd5e1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .arxiv-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #b31b1b;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .arxiv-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .arxiv-logo {
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #b31b1b;
+    }
+    .arxiv-tagline { font-size: 11px; color: #666; }
+    .arxiv-subject-pill {
+      font-size: 11px;
+      background: #f1f5f9;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #475569;
+    }
+    .paper-id { font-size: 11.5px; color: #b31b1b; font-weight: 600; margin-bottom: 6px; }
+    .paper-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+    .paper-authors {
+      font-size: 12px;
+      color: #2563eb;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .arxiv-actions-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .arxiv-btn {
+      background: #b31b1b;
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .arxiv-btn.secondary {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+    .abstract-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #b31b1b;
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: #334155;
+    }
+    .abstract-box strong { color: #0f172a; }
+
+    /* TabMind Sidebar */
     .sidebar {
-      width: 420px;
-      background: #070a12;
+      width: 440px;
+      background: #090d16;
       display: flex;
       flex-direction: column;
       border-left: 1px solid #1e293b;
-      position: relative;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
     }
     .side-header {
       height: 48px;
@@ -73,82 +176,88 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #1e293b;
-      background: #090d16;
+      background: #0f172a;
     }
     .brand { display: flex; align-items: center; gap: 8px; }
-    .brand-name { font-size: 13.5px; font-weight: 700; color: #f8fafc; }
+    .brand-name { font-size: 14px; font-weight: 700; color: #f8fafc; }
 
-    /* Open Skills Dropdown overlay */
+    /* Skills Popover Menu */
     .skills-popover {
-      position: absolute;
-      bottom: 60px;
-      left: 12px;
-      right: 12px;
-      top: 54px;
-      background: #090d16;
-      border: 1px solid #334155;
+      background: #0d1322;
+      border: 1px solid #2a374f;
       border-radius: 12px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+      margin: 12px;
+      padding: 14px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      z-index: 50;
+      gap: 10px;
+      flex: 1;
     }
     .pop-header {
-      padding: 12px 14px;
-      border-bottom: 1px solid #1e293b;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .pop-title { font-size: 12.5px; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 6px; }
+    .pop-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .add-btn {
-      background: #6366f1;
-      color: white;
-      border: none;
-      padding: 4px 10px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #c7d2fe;
+      padding: 3px 9px;
       border-radius: 6px;
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: 600;
       cursor: pointer;
     }
     .search-box {
-      margin: 8px 12px;
-      background: #0f172a;
+      background: #162032;
       border: 1px solid #334155;
-      border-radius: 6px;
-      padding: 6px 10px;
+      border-radius: 8px;
+      padding: 7px 10px;
       font-size: 11.5px;
-      color: #cbd5e1;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .cat-chips {
       display: flex;
       gap: 6px;
-      padding: 0 12px 8px;
-      border-bottom: 1px solid #1e293b;
       overflow-x: auto;
+      padding-bottom: 4px;
     }
     .chip {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      padding: 3px 9px;
+      background: #162032;
+      border: 1px solid #334155;
+      padding: 3px 8px;
       border-radius: 12px;
       font-size: 10px;
       color: #94a3b8;
       white-space: nowrap;
     }
-    .chip.active { background: #6366f1; color: white; border-color: #6366f1; font-weight: 600; }
-
+    .chip.active {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: #ffffff;
+      font-weight: 600;
+    }
     .skills-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 8px 12px;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      overflow-y: auto;
+      flex: 1;
     }
     .skill-row {
-      background: #0f172a;
+      background: #101623;
       border: 1px solid #1e293b;
       border-radius: 8px;
       padding: 8px 10px;
@@ -156,7 +265,11 @@
       align-items: center;
       gap: 10px;
     }
-    .skill-row:hover { border-color: #6366f1; background: #131d35; }
+    .skill-row.selected {
+      border-color: #6366f1;
+      background: #182236;
+      box-shadow: 0 0 0 1px #6366f1;
+    }
     .skill-icon { font-size: 16px; }
     .skill-info { flex: 1; }
     .skill-name { font-size: 12px; font-weight: 600; color: #f1f5f9; }
@@ -164,7 +277,8 @@
 
     .input-dock { padding: 10px 12px; background: #090d16; border-top: 1px solid #1e293b; margin-top: auto; }
     .input-box {
-      background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px;
+      background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 8px 10px;
+      display: flex; align-items: center; justify-content: space-between;
     }
   </style>
 </head>
@@ -175,78 +289,111 @@
       <div class="w-dot w-yellow"></div>
       <div class="w-dot w-green"></div>
       <div class="browser-tabs">
-        <div class="tab active"><span>📚</span><span>Research Paper - Transformers</span></div>
+        <div class="tab active"><span>📄</span><span>[1706.03762] Attention Is All You Need</span></div>
       </div>
     </div>
     <div class="nav-bar">
-      <div class="url-bar"><span>🔒</span><span>https://arxiv.org/abs/attention-is-all-you-need</span></div>
+      <div class="nav-btn"><span>‹</span><span>›</span><span>↻</span></div>
+      <div class="url-bar">
+        <span>🔒</span>
+        <span class="host">arxiv.org</span><span class="path">/abs/1706.03762</span>
+      </div>
+      <div class="ext-icon-badge">
+        <span>⚡</span>
+        <span>40+ Built-in Skills</span>
+      </div>
     </div>
   </div>
 
   <div class="viewport">
+    <!-- Real arXiv Paper Content -->
     <div class="page-content">
-      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Attention Is All You Need</h1>
-      <p style="color: #94a3b8; font-size: 13px; line-height: 1.6;">
-        The dominant sequence transduction models are based on complex recurrent or convolutional neural networks. We propose the Transformer, a model architecture eschewing recurrence and relying entirely on an attention mechanism...
-      </p>
+      <div class="arxiv-header">
+        <div class="arxiv-brand">
+          <span class="arxiv-logo">arXiv</span>
+          <span class="arxiv-tagline">Cornell University Research Library</span>
+        </div>
+        <span class="arxiv-subject-pill">cs.CL · Machine Learning</span>
+      </div>
+
+      <div class="paper-id">[arXiv:1706.03762v7] Computer Science > Computation and Language</div>
+      <h1 class="paper-title">Attention Is All You Need</h1>
+      <div class="paper-authors">
+        Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin
+      </div>
+
+      <div class="arxiv-actions-bar">
+        <div class="arxiv-btn"><span>📥</span> Download PDF</div>
+        <div class="arxiv-btn secondary"><span>📑</span> View HTML</div>
+        <div class="arxiv-btn secondary"><span>🔗</span> DOI / BibTeX</div>
+      </div>
+
+      <div class="abstract-box">
+        <strong>Abstract:</strong> The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. We propose the <strong>Transformer</strong>, a model architecture eschewing recurrence and relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs...
+      </div>
     </div>
 
+    <!-- TabMind Sidebar -->
     <div class="sidebar">
       <div class="side-header">
         <div class="brand">
           <span class="brand-name">TabMind</span>
-          <span style="font-size: 9px; font-weight: 700; background: rgba(99,102,241,0.2); padding: 1px 5px; border-radius: 4px; color: #a5b4fc;">40+ SKILLS</span>
+          <span style="font-size: 9px; font-weight: 700; background: rgba(99,102,241,0.2); padding: 2px 6px; border-radius: 4px; color: #a5b4fc;">40+ CHROME SKILLS</span>
         </div>
+        <span style="font-size: 11px; color: #64748b;">Press / anywhere</span>
       </div>
 
-      <!-- Skills Palette -->
+      <!-- Skills Popover -->
       <div class="skills-popover">
         <div class="pop-header">
-          <span class="pop-title"><span>⚡</span><span>Skills Catalog (40+)</span></span>
-          <button class="add-btn">＋ Add Custom</button>
+          <span class="pop-title"><span>⚡</span><span>Skills Catalog</span></span>
+          <button class="add-btn">＋ Add Skill</button>
         </div>
-        <div class="search-box">🔍 Search skills or type instructions...</div>
+        <div class="search-box">
+          <span>🔍</span>
+          <span>Search 40+ skills or type custom prompt...</span>
+        </div>
         <div class="cat-chips">
           <div class="chip active">All (40)</div>
-          <div class="chip">Understand (11)</div>
+          <div class="chip">Understand (14)</div>
           <div class="chip">Research (6)</div>
-          <div class="chip">Learning (4)</div>
-          <div class="chip">Custom (1)</div>
+          <div class="chip">Learning (5)</div>
+          <div class="chip">Writing (8)</div>
         </div>
         <div class="skills-list">
           <div class="skill-row">
             <span class="skill-icon">📝</span>
             <div class="skill-info">
               <div class="skill-name">Summarize as text</div>
-              <div class="skill-desc">Finds core argument & identifies key takeaways.</div>
+              <div class="skill-desc">Extract core argument, hypothesis, and key findings.</div>
             </div>
           </div>
-          <div class="skill-row" style="border-color: #6366f1; background: #131d35;">
+          <div class="skill-row selected">
             <span class="skill-icon">📊</span>
             <div class="skill-info">
               <div class="skill-name">Summarize as table</div>
-              <div class="skill-desc">Extracts comparisons into clean Markdown tables.</div>
+              <div class="skill-desc">Structure data & comparisons into clean Markdown tables.</div>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-icon">✅</span>
+            <span class="skill-icon">🎯</span>
             <div class="skill-info">
-              <div class="skill-name">Action items</div>
-              <div class="skill-desc">Scans page for deliverables, tasks, and owners.</div>
+              <div class="skill-name">Explain simply</div>
+              <div class="skill-desc">Break down complex research into plain language.</div>
             </div>
           </div>
           <div class="skill-row">
             <span class="skill-icon">🗺️</span>
             <div class="skill-info">
               <div class="skill-name">Study guide</div>
-              <div class="skill-desc">Condenses material into core concepts and formulas.</div>
+              <div class="skill-desc">Generates definitions, core formulas, and key takeaways.</div>
             </div>
           </div>
           <div class="skill-row">
-            <span class="skill-icon">💡</span>
+            <span class="skill-icon">🏷️</span>
             <div class="skill-info">
-              <div class="skill-name">Code Explainer (Custom)</div>
-              <div class="skill-desc">User-created custom skill for system architecture.</div>
+              <div class="skill-name">Generate citations</div>
+              <div class="skill-desc">Outputs APA, BibTeX, and IEEE formatted references.</div>
             </div>
           </div>
         </div>
@@ -254,7 +401,8 @@
 
       <div class="input-dock">
         <div class="input-box">
-          <div style="font-size: 12px; color: #64748b;">Type / for skills menu...</div>
+          <span style="font-size: 12px; color: #64748b;">Type / for skills, @ for tabs...</span>
+          <span style="font-size: 11px; color: #818cf8; font-weight: 500;">ESC to close</span>
         </div>
       </div>
     </div>

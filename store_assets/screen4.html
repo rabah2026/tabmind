@@ -23,6 +23,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 8px 12px 6px;
+      user-select: none;
     }
     .window-controls { display: flex; align-items: center; gap: 7px; }
     .w-dot { width: 11px; height: 11px; border-radius: 50%; }
@@ -32,24 +33,100 @@
     .browser-tabs { display: flex; align-items: flex-end; gap: 6px; margin-left: 70px; margin-top: -16px; }
     .tab {
       background: #1e293b; padding: 6px 14px; border-radius: 8px 8px 0 0; font-size: 11.5px; color: #94a3b8;
-      display: flex; align-items: center; gap: 7px;
+      display: flex; align-items: center; gap: 7px; max-width: 250px;
     }
-    .tab.active { background: #090d16; color: #f8fafc; font-weight: 500; border-top: 2px solid #10b981; }
+    .tab.active { background: #ffffff; color: #1e293b; font-weight: 600; border-top: 2px solid #10b981; }
     .nav-bar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-btn { color: #94a3b8; font-size: 14px; display: flex; gap: 8px; }
     .url-bar {
       flex: 1; height: 28px; background: #090d16; border: 1px solid #334155; border-radius: 14px;
-      display: flex; align-items: center; padding: 0 12px; font-size: 11.5px; color: #94a3b8; gap: 8px;
+      display: flex; align-items: center; padding: 0 12px; font-size: 11.5px; color: #cbd5e1; gap: 8px;
     }
-    .viewport { display: flex; flex: 1; height: calc(800px - 74px); }
-    .page-content { flex: 1; background: #0b0f19; padding: 36px 48px; border-right: 1px solid #1e293b; }
+    .url-bar .host { color: #f8fafc; font-weight: 500; }
+    .url-bar .path { color: #94a3b8; }
+    .ext-icon-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #6ee7b7;
+      font-weight: 600;
+    }
 
+    /* Main Viewport Split */
+    .viewport { display: flex; flex: 1; height: calc(800px - 74px); }
+
+    /* Chrome for Developers Content */
+    .page-content {
+      flex: 1;
+      background: #ffffff;
+      color: #202124;
+      padding: 28px 40px 36px;
+      overflow-y: hidden;
+      border-right: 1px solid #cbd5e1;
+      font-family: "Google Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .dev-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #dadce0;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+    .dev-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #202124;
+    }
+    .dev-logo span { color: #1a73e8; }
+    .dev-breadcrumbs {
+      font-size: 11.5px;
+      color: #5f6368;
+      margin-bottom: 8px;
+    }
+    .dev-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #202124;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .dev-desc {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: #3c4043;
+      margin-bottom: 18px;
+    }
+    .dev-code-box {
+      background: #202124;
+      color: #e8eaed;
+      border-radius: 8px;
+      padding: 16px 18px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.65;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .dev-code-cmt { color: #9aa0a6; }
+    .dev-code-kw { color: #f28b82; }
+    .dev-code-str { color: #81c995; }
+
+    /* TabMind Sidebar */
     .sidebar {
-      width: 420px;
-      background: #070a12;
+      width: 440px;
+      background: #090d16;
       display: flex;
       flex-direction: column;
       border-left: 1px solid #1e293b;
-      position: relative;
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
     }
     .side-header {
       height: 48px;
@@ -58,77 +135,103 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #1e293b;
-      background: #090d16;
+      background: #0f172a;
     }
-    .brand-name { font-size: 13.5px; font-weight: 700; color: #f8fafc; }
+    .brand-name { font-size: 14px; font-weight: 700; color: #f8fafc; }
 
-    /* Settings Drawer View */
+    /* Settings View */
     .settings-view {
       flex: 1;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       overflow-y: auto;
+    }
+    .privacy-banner {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: #6ee7b7;
+      line-height: 1.45;
     }
     .setting-group {
       background: #0f172a;
       border: 1px solid #1e293b;
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 12px;
     }
     .group-title { font-size: 12px; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
-    .radio-row {
+    .radio-card {
+      background: #162032;
+      border: 1px solid #2a374f;
+      border-radius: 6px;
+      padding: 8px 10px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 0;
-      font-size: 12px;
-      color: #cbd5e1;
-    }
-    .field-label { font-size: 11px; color: #94a3b8; margin: 8px 0 4px; display: block; }
-    .text-input {
-      width: 100%;
-      background: #090d16;
-      border: 1px solid #334155;
-      border-radius: 6px;
-      padding: 6px 10px;
       font-size: 11.5px;
-      color: #e2e8f0;
-    }
-    .btn-test {
-      margin-top: 10px;
-      width: 100%;
-      background: #1e293b;
-      border: 1px solid #334155;
       color: #cbd5e1;
-      padding: 6px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
     }
-    .status-box {
-      margin-top: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 8px 10px;
+    .radio-card.selected {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+      color: #f1f5f9;
+      font-weight: 600;
+    }
+    .radio-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid #10b981;
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+    .radio-dot.unselected {
+      border: 2px solid #64748b;
+      background: transparent;
+      box-shadow: none;
+    }
+    .ping-box {
+      margin-top: 4px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       border-radius: 6px;
+      padding: 10px 12px;
       font-size: 11px;
       color: #34d399;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .privacy-callout {
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 11px;
-      color: #c7d2fe;
       line-height: 1.5;
     }
+    .settings-footer {
+      padding: 12px 14px;
+      background: #0f172a;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .save-btn {
+      width: 100%;
+      background: #10b981;
+      color: #042f2e;
+      font-weight: 700;
+      border: none;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .review-link {
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+    }
+    .review-link:hover { color: #fbbf24; }
   </style>
 </head>
 <body>
@@ -138,70 +241,100 @@
       <div class="w-dot w-yellow"></div>
       <div class="w-dot w-green"></div>
       <div class="browser-tabs">
-        <div class="tab active"><span>⚙️</span><span>Local Engine Settings</span></div>
+        <div class="tab active"><span>🌐</span><span>Prompt API with Gemini Nano · Chrome</span></div>
       </div>
     </div>
     <div class="nav-bar">
-      <div class="url-bar"><span>🔒</span><span>chrome-extension://tabmind/settings</span></div>
+      <div class="nav-btn"><span>‹</span><span>›</span><span>↻</span></div>
+      <div class="url-bar">
+        <span>🔒</span>
+        <span class="host">developer.chrome.com</span><span class="path">/docs/ai/built-in</span>
+      </div>
+      <div class="ext-icon-badge">
+        <span>⚙️</span>
+        <span>Engine Settings & Status</span>
+      </div>
     </div>
   </div>
 
   <div class="viewport">
+    <!-- Real Chrome Developer Content -->
     <div class="page-content">
-      <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Zero Data Leakage Architecture</h1>
-      <p style="color: #94a3b8; font-size: 13px; line-height: 1.6;">
-        TabMind connects directly to local inference loops on loopback address 127.0.0.1. Model weights, prompts, and memory buffers never exit your physical machine.
+      <div class="dev-header">
+        <div class="dev-logo">Google <span>Chrome for Developers</span></div>
+      </div>
+
+      <div class="dev-breadcrumbs">Docs › AI on Chrome › Built-in AI › Prompt API</div>
+      <h1 class="dev-title">Prompt API with Gemini Nano in Chrome</h1>
+      <p class="dev-desc">
+        Chrome includes Gemini Nano, an efficient on-device large language model designed to execute locally on desktop and laptop hardware without external API servers.
       </p>
+
+      <div class="dev-code-box">
+        <span class="dev-code-cmt">// Run on-device inference with zero network latency</span><br/>
+        <span class="dev-code-kw">const</span> session = <span class="dev-code-kw">await</span> window.ai.languageModel.create();<br/>
+        <span class="dev-code-kw">const</span> stream = session.promptStreaming(<span class="dev-code-str">"Summarize this open tab..."</span>);<br/>
+        <span class="dev-code-kw">for await</span> (<span class="dev-code-kw">const</span> chunk <span class="dev-code-kw">of</span> stream) {<br/>
+        &nbsp;&nbsp;console.log(chunk); <span class="dev-code-cmt">// Real-time tokens rendered 100% locally</span><br/>
+        }
+      </div>
     </div>
 
+    <!-- TabMind Sidebar -->
     <div class="sidebar">
       <div class="side-header">
-        <span class="brand-name">⚙ Local Engine Settings</span>
-        <button style="background: #6366f1; border: none; color: white; padding: 4px 10px; border-radius: 5px; font-size: 11px; font-weight: 600;">Save</button>
+        <span class="brand-name">⚙ Local Engine Configuration</span>
+        <span style="font-size: 10px; color: #10b981; font-weight: 700; background: rgba(16,185,129,0.15); padding: 2px 6px; border-radius: 4px;">ACTIVE</span>
       </div>
 
       <div class="settings-view">
-        <div class="privacy-callout">
-          <strong>🔒 100% Private On-Device Execution</strong><br/>
-          Zero cloud calls. Select your local provider below.
+        <div class="privacy-banner">
+          <strong>🔒 100% On-Device & Zero Data Leakage</strong><br/>
+          TabMind connects directly to local inference loops. Prompts and page text never leave your machine.
         </div>
 
         <div class="setting-group">
-          <div class="group-title">Inference Provider</div>
-          <div class="radio-row">
-            <input type="radio" checked> <span><strong>Ollama</strong> (Local Service)</span>
+          <div class="group-title">Primary Inference Engine</div>
+
+          <div class="radio-card selected">
+            <div class="radio-dot"></div>
+            <div>
+              <strong>Chrome Built-in AI (Gemini Nano)</strong>
+              <div style="font-size: 10px; color: #94a3b8; font-weight: normal;">Default • 0ms setup • Runs natively in Chrome</div>
+            </div>
           </div>
-          <div class="radio-row">
-            <input type="radio"> <span><strong>Chrome Built-in AI</strong> (Gemini Nano)</span>
+
+          <div class="radio-card">
+            <div class="radio-dot unselected"></div>
+            <div>
+              <strong>Ollama (Local Service)</strong>
+              <div style="font-size: 10px; color: #64748b;">http://127.0.0.1:11434 • Llama 3.2, Mistral, Qwen</div>
+            </div>
           </div>
-          <div class="radio-row">
-            <input type="radio"> <span><strong>LM Studio / Local OpenAI</strong></span>
+
+          <div class="radio-card">
+            <div class="radio-dot unselected"></div>
+            <div>
+              <strong>LM Studio / Local OpenAI</strong>
+              <div style="font-size: 10px; color: #64748b;">http://127.0.0.1:1234/v1 • Custom GGUF models</div>
+            </div>
           </div>
         </div>
 
         <div class="setting-group">
-          <div class="group-title">Ollama Configuration</div>
-          <label class="field-label">Server URL</label>
-          <input class="text-input" value="http://127.0.0.1:11434">
-
-          <label class="field-label">Model Selected</label>
-          <input class="text-input" value="llama3.2:latest">
-
-          <button class="btn-test">Test Connection</button>
-          <div class="status-box">
-            <span>✅</span>
-            <span>Connected: Ollama with model "llama3.2"</span>
+          <div class="group-title">Live Engine Verification</div>
+          <div class="ping-box">
+            <strong>✔ Chrome Built-in AI is ready!</strong><br/>
+            Engine: Gemini Nano (On-Device)<br/>
+            Latency: 0ms • Offline Inference: Enabled<br/>
+            Status: Readily available for prompt execution.
           </div>
         </div>
+      </div>
 
-        <div class="setting-group">
-          <div class="group-title">Context Limit</div>
-          <div style="display: flex; justify-content: space-between; font-size: 11px; color: #94a3b8; margin-bottom: 6px;">
-            <span>Max Tab Context</span>
-            <span style="color: #6366f1; font-weight: 600;">16,000 chars</span>
-          </div>
-          <input type="range" style="width: 100%; accent-color: #6366f1;" min="4000" max="32000" value="16000">
-        </div>
+      <div class="settings-footer">
+        <button class="save-btn">Save Configuration</button>
+        <a href="#" class="review-link">⭐ Love TabMind? Leave a review on Chrome Web Store</a>
       </div>
     </div>
   </div>

@@ -23,6 +23,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 8px 12px 6px;
+      user-select: none;
     }
     .window-controls { display: flex; align-items: center; gap: 7px; }
     .w-dot { width: 11px; height: 11px; border-radius: 50%; }
@@ -39,9 +40,11 @@
       display: flex;
       align-items: center;
       gap: 7px;
+      max-width: 220px;
     }
-    .tab.active { background: #090d16; color: #f8fafc; font-weight: 500; border-top: 2px solid #06b6d4; }
+    .tab.active { background: #0d1117; color: #f0f6fc; font-weight: 600; border-top: 2px solid #58a6ff; }
     .nav-bar { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-btn { color: #94a3b8; font-size: 14px; display: flex; gap: 8px; }
     .url-bar {
       flex: 1;
       height: 28px;
@@ -52,48 +55,121 @@
       align-items: center;
       padding: 0 12px;
       font-size: 11.5px;
-      color: #94a3b8;
+      color: #cbd5e1;
       gap: 8px;
     }
+    .url-bar .host { color: #f8fafc; font-weight: 500; }
+    .url-bar .path { color: #94a3b8; }
     .ext-icon-badge {
       display: flex;
       align-items: center;
       gap: 6px;
       background: rgba(6, 182, 212, 0.2);
       border: 1px solid rgba(6, 182, 212, 0.5);
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
       font-size: 11px;
       color: #67e8f9;
+      font-weight: 600;
     }
 
+    /* Main Viewport Split */
     .viewport { display: flex; flex: 1; height: calc(800px - 74px); }
+
+    /* GitHub Page Content */
     .page-content {
       flex: 1;
-      background: #0b0f19;
-      padding: 36px 48px;
-      overflow-y: auto;
-      border-right: 1px solid #1e293b;
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 24px 36px 36px;
+      overflow-y: hidden;
+      border-right: 1px solid #30363d;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     }
-    .repo-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .repo-title { font-size: 22px; font-weight: 700; color: #f8fafc; }
-    .repo-pill { background: #1e293b; border: 1px solid #334155; padding: 2px 8px; border-radius: 12px; font-size: 11px; color: #94a3b8; }
-    .readme-card {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 24px;
+    .gh-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
-    .readme-card h2 { font-size: 16px; margin-bottom: 12px; color: #f1f5f9; }
-    .readme-card p { font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 12px; }
+    .gh-repo-path {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+    }
+    .gh-repo-path a { color: #58a6ff; text-decoration: none; font-weight: 600; }
+    .gh-pill {
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 10px;
+      border: 1px solid #30363d;
+      color: #8b949e;
+    }
+    .gh-actions { display: flex; gap: 8px; }
+    .gh-btn {
+      background: #21262d;
+      border: 1px solid #30363d;
+      color: #c9d1d9;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gh-tabs {
+      display: flex;
+      gap: 16px;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 8px;
+      margin-bottom: 18px;
+      font-size: 12.5px;
+    }
+    .gh-tab { color: #8b949e; display: flex; align-items: center; gap: 6px; }
+    .gh-tab.active { color: #f0f6fc; font-weight: 600; border-bottom: 2px solid #f78166; padding-bottom: 8px; margin-bottom: -10px; }
 
+    .gh-readme-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 20px;
+    }
+    .readme-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #f0f6fc;
+    }
+    .readme-title { font-size: 22px; font-weight: 700; color: #f0f6fc; margin-bottom: 10px; }
+    .readme-desc { font-size: 13px; line-height: 1.6; color: #8b949e; margin-bottom: 14px; }
+    .gh-code-block {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 11.5px;
+      color: #e6edf3;
+      line-height: 1.6;
+    }
+    .gh-code-comment { color: #8b949e; }
+    .gh-code-cmd { color: #7ee787; }
+
+    /* TabMind Sidebar */
     .sidebar {
-      width: 420px;
-      background: #070a12;
+      width: 440px;
+      background: #090d16;
       display: flex;
       flex-direction: column;
       border-left: 1px solid #1e293b;
-      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.4);
+      box-shadow: -8px 0 24px rgba(0, 0, 0, 0.5);
     }
     .side-header {
       height: 48px;
@@ -102,51 +178,61 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #1e293b;
-      background: #090d16;
+      background: #0f172a;
     }
     .brand { display: flex; align-items: center; gap: 8px; }
-    .brand-logo svg { width: 20px; height: 20px; }
-    .brand-name { font-size: 13.5px; font-weight: 700; color: #f8fafc; }
+    .brand-logo svg { width: 22px; height: 22px; }
+    .brand-name { font-size: 14px; font-weight: 700; color: #f8fafc; letter-spacing: -0.2px; }
     .brand-tag {
       font-size: 8.5px;
       font-weight: 700;
       font-family: monospace;
-      padding: 1px 5px;
+      padding: 2px 6px;
       border-radius: 4px;
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #a5b4fc;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #67e8f9;
     }
-    .header-btns { display: flex; gap: 4px; }
+    .header-btns { display: flex; gap: 5px; }
     .h-btn {
-      width: 26px; height: 26px; border-radius: 5px; background: #0f172a; border: 1px solid #1e293b; color: #94a3b8;
-      display: flex; align-items: center; justify-content: center; font-size: 12px;
+      width: 26px; height: 26px; border-radius: 6px; background: #1e293b; border: 1px solid #334155;
+      color: #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 12px;
     }
 
-    .chat-scroll { flex: 1; padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    /* Chat Area */
+    .chat-scroll {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
     .msg-user {
       align-self: flex-end;
       background: linear-gradient(135deg, #4f46e5, #6366f1);
       color: #ffffff;
-      padding: 8px 12px;
-      border-radius: 12px 12px 2px 12px;
-      font-size: 12.5px;
-      max-width: 88%;
+      padding: 8px 13px;
+      border-radius: 14px 14px 3px 14px;
+      font-size: 12px;
+      max-width: 90%;
+      line-height: 1.45;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
     }
     .msg-ai {
       align-self: flex-start;
+      width: 100%;
       font-size: 12px;
       color: #cbd5e1;
       line-height: 1.5;
     }
 
-    /* Centered Divider */
+    /* Centered Context Divider */
     .chat-tab-divider {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 10px 0;
-      gap: 8px;
+      gap: 10px;
+      margin: 8px 0;
       width: 100%;
     }
     .divider-line {
@@ -161,16 +247,17 @@
       padding: 4px 12px;
       border-radius: 9999px;
       background: #0f172a;
-      border: 1px solid #334155;
-      color: #cbd5e1;
+      border: 1px solid #3b82f6;
+      color: #93c5fd;
       font-size: 11px;
       font-weight: 500;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
     }
 
+    /* Context Pill Bar */
     .context-bar {
       padding: 6px 12px;
-      background: #090d16;
+      background: #0f172a;
       border-top: 1px solid #1e293b;
       display: flex;
       align-items: center;
@@ -180,24 +267,36 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #0f172a;
-      border: 1px solid #1e293b;
+      background: #1e293b;
+      border: 1px solid #334155;
       border-radius: 12px;
-      padding: 3px 9px;
+      padding: 3px 10px;
       font-size: 10.5px;
-      color: #94a3b8;
+      color: #cbd5e1;
+      max-width: 290px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .input-dock { padding: 10px 12px; background: #090d16; border-top: 1px solid #1e293b; }
+
+    /* Input Dock */
+    .input-dock {
+      padding: 10px 12px;
+      background: #090d16;
+      border-top: 1px solid #1e293b;
+    }
     .input-box {
       background: #0f172a;
       border: 1px solid #334155;
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 8px 10px;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
     .dock-tools { display: flex; align-items: center; justify-content: space-between; }
+    .tools-left { display: flex; align-items: center; gap: 8px; }
+    .tool-shortcut { font-size: 11px; color: #94a3b8; }
     .model-pill {
       display: flex;
       align-items: center;
@@ -208,9 +307,13 @@
       border-radius: 10px;
       font-size: 10px;
       color: #e2e8f0;
+      font-weight: 500;
     }
     .dot-green { width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
-    .send-btn { width: 24px; height: 24px; border-radius: 5px; background: #6366f1; color: white; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .send-btn {
+      width: 26px; height: 26px; border-radius: 6px; background: #6366f1; color: white;
+      display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -220,27 +323,59 @@
       <div class="w-dot w-yellow"></div>
       <div class="w-dot w-green"></div>
       <div class="browser-tabs">
-        <div class="tab"><span>⚡</span><span>Local AI Architecture...</span></div>
-        <div class="tab active"><span>🐙</span><span>GitHub - ggerganov/llama.cpp</span></div>
+        <div class="tab"><span>🪐</span><span>James Webb Space Telescope</span></div>
+        <div class="tab active"><span>🐙</span><span>ggerganov/llama.cpp · GitHub</span></div>
       </div>
     </div>
     <div class="nav-bar">
-      <div class="url-bar"><span>🔒</span><span>https://github.com/ggerganov/llama.cpp</span></div>
-      <div class="ext-icon-badge"><span>🌐</span><span>Multi-Tab Research Active</span></div>
+      <div class="nav-btn"><span>‹</span><span>›</span><span>↻</span></div>
+      <div class="url-bar">
+        <span>🔒</span>
+        <span class="host">github.com</span><span class="path">/ggerganov/llama.cpp</span>
+      </div>
+      <div class="ext-icon-badge">
+        <span>🌐</span>
+        <span>Multi-Tab Research Active</span>
+      </div>
     </div>
   </div>
 
   <div class="viewport">
+    <!-- Real GitHub Repository Content -->
     <div class="page-content">
-      <div class="repo-header">
-        <span style="font-size: 24px;">📁</span>
-        <h1 class="repo-title">ggerganov / llama.cpp</h1>
-        <span class="repo-pill">Public</span>
+      <div class="gh-header">
+        <div class="gh-repo-path">
+          <span>📁</span>
+          <a href="#">ggerganov</a> / <a href="#">llama.cpp</a>
+          <span class="gh-pill">Public</span>
+        </div>
+        <div class="gh-actions">
+          <div class="gh-btn"><span>⭐</span> Star <span>74.8k</span></div>
+          <div class="gh-btn"><span>🍴</span> Fork <span>11.3k</span></div>
+        </div>
       </div>
-      <div class="readme-card">
-        <h2>README.md</h2>
-        <p>Port of Facebook's LLaMA model in pure C/C++ with no dependencies. Highly optimized for Apple Silicon (Metal) and AVX2 on x86 architectures.</p>
-        <p>Supports 1.5-bit to 8-bit integer quantization for state-of-the-art inference efficiency on standard laptops.</p>
+
+      <div class="gh-tabs">
+        <div class="gh-tab active"><span>〈 〉</span> Code</div>
+        <div class="gh-tab"><span>⊙</span> Issues 138</div>
+        <div class="gh-tab"><span>⇄</span> Pull requests 31</div>
+        <div class="gh-tab"><span>▶</span> Actions</div>
+      </div>
+
+      <div class="gh-readme-card">
+        <div class="readme-header">
+          <span>📖</span> README.md
+        </div>
+        <h1 class="readme-title">llama.cpp</h1>
+        <p class="readme-desc">
+          Port of Facebook's LLaMA model in pure C/C++ with zero external dependencies. Highly optimized for Apple Silicon (Metal) and AVX2/AVX-512 on x86 architectures.
+        </p>
+        <div class="gh-code-block">
+          <span class="gh-code-comment"># Build with Apple Silicon Metal acceleration</span><br/>
+          <span class="gh-code-cmd">cmake -B build -DGGML_METAL=ON && cmake --build build --config Release</span><br/><br/>
+          <span class="gh-code-comment"># Run 4-bit quantized model locally</span><br/>
+          <span class="gh-code-cmd">./build/bin/llama-cli -m ./models/7B/ggml-model-q4_k_m.gguf -p "Explain quantum computing"</span>
+        </div>
       </div>
     </div>
 
@@ -255,7 +390,7 @@
             </svg>
           </div>
           <span class="brand-name">TabMind</span>
-          <span class="brand-tag">LOCAL ENGINE</span>
+          <span class="brand-tag">CONTINUOUS SESSION</span>
         </div>
         <div class="header-btns">
           <div class="h-btn">＋</div>
@@ -266,8 +401,12 @@
       </div>
 
       <div class="chat-scroll">
-        <div class="msg-user">What quantization level was recommended in the previous article?</div>
-        <div class="msg-ai">The previous article highlighted 4-bit (Q4_K_M) quantization as the sweet spot, fitting 7B models under 4GB of RAM.</div>
+        <div class="msg-user">
+          What was the orbit distance of the telescope discussed in the previous tab?
+        </div>
+        <div class="msg-ai">
+          The James Webb Space Telescope operates at the Sun–Earth L<sub>2</sub> Lagrange point, approximately <strong>1.5 million kilometers (930,000 miles)</strong> from Earth.
+        </div>
 
         <!-- Centered Context Switch Divider -->
         <div class="chat-tab-divider">
@@ -279,27 +418,31 @@
           <div class="divider-line"></div>
         </div>
 
-        <div class="msg-user">Does this repository support Metal GPU acceleration for Mac?</div>
+        <div class="msg-user">
+          How do I build this repo on my Mac with full Metal GPU support?
+        </div>
         <div class="msg-ai">
-          Yes! The README confirms pure C/C++ implementation with native Apple Silicon Metal acceleration, enabling full GPU offloading with 0 external cloud dependencies.
+          According to the README on this page, run:<br/><br/>
+          <code>cmake -B build -DGGML_METAL=ON<br/>cmake --build build --config Release</code><br/><br/>
+          This enables 100% on-device Metal acceleration with zero external dependencies.
         </div>
       </div>
 
       <div class="context-bar">
         <div class="tab-pill">
           <span>🐙</span>
-          <span>Sharing "GitHub - ggerganov/llama.cpp"</span>
+          <span>ggerganov/llama.cpp · GitHub</span>
         </div>
-        <span style="font-size: 10px; color: #64748b;">Context Switch Active</span>
+        <span style="font-size: 10px; color: #3b82f6; font-weight: 600;">● Active Tab</span>
       </div>
 
       <div class="input-dock">
         <div class="input-box">
-          <div style="font-size: 12px; color: #64748b;">Ask anything across tabs...</div>
+          <div style="font-size: 12px; color: #64748b;">Ask anything across tabs... (@ tab, / skill)</div>
           <div class="dock-tools">
-            <div style="display: flex; gap: 6px; align-items: center;">
-              <span style="font-size: 11px; color: #94a3b8;">/ Skills</span>
-              <span style="font-size: 11px; color: #94a3b8;">@ Tabs</span>
+            <div class="tools-left">
+              <span class="tool-shortcut">/ Skills</span>
+              <span class="tool-shortcut">@ Tabs</span>
               <div class="model-pill">
                 <span class="dot-green"></span>
                 <span>llama3.2</span>
